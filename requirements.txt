@@ -6,3 +6,5 @@ python-dotenv
 python-multipart
 httpx
 chromadb
+google-generativeai
+pypdf2
