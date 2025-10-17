@@ -8,3 +8,4 @@ httpx
 chromadb
 google-generativeai
 pypdf2
+ollama

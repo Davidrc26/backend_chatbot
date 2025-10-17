@@ -18,6 +18,13 @@ class Settings(BaseSettings):
     
     # Gemini Configuration
     GOOGLE_API_KEY: str = ""  # API Key de Google Gemini
+    
+    # Ollama Configuration
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+    OLLAMA_MODEL: str = "llama3.1:latest"
+    
+    # Embedding Provider: "gemini" o "ollama"
+    EMBEDDING_PROVIDER: str = "ollama"
 
     class Config:
         env_file = ".env"
