@@ -48,3 +48,6 @@ logs/
 
 # Database
 *.sqlite3
+
+# ChromaDB
+chroma_db/
