@@ -13,7 +13,11 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     
     # ChromaDB Configuration
-    CHROMA_DB_PATH: str = "./chroma_db"  # Ruta para la persistencia de ChromaDB
+    USE_CHROMA_CLOUD: bool = True  # True para usar cloud, False para local
+    CHROMA_DB_PATH: str = "./chroma_db"  # Ruta local (solo si USE_CHROMA_CLOUD=False)
+    CHROMA_CLOUD_API_KEY: str = ""
+    CHROMA_CLOUD_TENANT: str = ""
+    CHROMA_CLOUD_DATABASE: str = "inteligentes"
     
     # Gemini Configuration
     GOOGLE_API_KEY: str = ""  # API Key de Google Gemini

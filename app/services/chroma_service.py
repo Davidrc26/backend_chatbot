@@ -5,18 +5,29 @@ from app.core.config import settings
 
 class ChromaDBService:
     """
-    Servicio para manejar la conexión y operaciones con ChromaDB
+    Servicio para manejar la conexión y operaciones con ChromaDB (local o cloud)
     """
     
     def __init__(self):
-        # Crear cliente de ChromaDB con persistencia
-        self.client = chromadb.PersistentClient(
-            path=settings.CHROMA_DB_PATH,
-            settings=ChromaSettings(
-                anonymized_telemetry=False,
-                allow_reset=True
+        # Decidir si usar ChromaDB Cloud o Local
+        if settings.USE_CHROMA_CLOUD:
+            # Usar ChromaDB Cloud
+            self.client = chromadb.CloudClient(
+                tenant=settings.CHROMA_CLOUD_TENANT,
+                database=settings.CHROMA_CLOUD_DATABASE,
+                api_key=settings.CHROMA_CLOUD_API_KEY
             )
-        )
+            print("✅ Conectado a ChromaDB Cloud")
+        else:
+            # Usar ChromaDB Local con persistencia
+            self.client = chromadb.PersistentClient(
+                path=settings.CHROMA_DB_PATH,
+                settings=ChromaSettings(
+                    anonymized_telemetry=False,
+                    allow_reset=True
+                )
+            )
+            print("✅ Conectado a ChromaDB Local")
         
         # Diccionario para cachear colecciones
         self.collections = {}
