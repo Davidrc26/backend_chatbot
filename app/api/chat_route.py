@@ -1,59 +1,114 @@
 from fastapi import APIRouter, HTTPException, Query
-from typing import List
-from app.schemas.chat import ChatRequest, ChatResponse
-from app.services.embedding_service import embedding_service
+from app.schemas.chat import ChatRequest, ChatResponse, ChatWithHistoryRequest
+from app.services.chat_service import chat_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 
 
-@router.post("/", response_model=ChatResponse)
-async def chat_endpoint_with_embeddings(
+@router.post("/simple", response_model=ChatResponse)
+async def chat_simple(
     chat_request: ChatRequest,
-    provider: str = Query(default="llama", description="Provider de embeddings: 'llama' o 'gemini'")
+    provider: str = Query(default="llama", description="Provider LLM: 'llama' o 'gemini'")
 ):
     """
-    Endpoint para manejar consultas de chat utilizando embeddings
+    Chat simple sin contexto de documentos
     
     Args:
-        chat_request: Objeto ChatRequest con la consulta del usuario
-        provider: "llama" o "gemini" - elige qué modelo usar para embeddings
+        chat_request: Mensaje del usuario
+        provider: "llama" o "gemini"
         
     Returns:
-        ChatResponse con la respuesta generada
+        Respuesta de la LLM
     """
-    # Validar provider
     if provider not in ["llama", "gemini"]:
         raise HTTPException(status_code=400, detail="Provider debe ser 'llama' o 'gemini'")
     
-    # Generar embedding para la consulta
-    query_embedding = embedding_service.generate_query_embedding(
-        query=chat_request.query,
-        provider=provider
-    )
-    
-    # Aquí se podría agregar lógica adicional para buscar en la base de datos
-    # y generar una respuesta basada en los documentos encontrados.
-    
-    # Respuesta simulada por ahora
-    response_text = f"Respuesta generada para la consulta: {chat_request.query}"
-    
-    return ChatResponse(answer=response_text)
+    try:
+        response = chat_service.get_simple_response(
+            message=chat_request.message,
+            provider=provider
+        )
+        
+        return ChatResponse(
+            response=response,
+            success=True
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en el chat: {str(e)}")
 
 
-router.post("/", response_model=ChatResponse)
-async def chat_endpoint_without_embeddings(
-    chat_request: ChatRequest
+@router.post("/rag", response_model=ChatResponse)
+async def chat_with_rag(
+    chat_request: ChatRequest,
+    provider: str = Query(default="llama", description="Provider: 'llama' o 'gemini'")
 ):
     """
-    Endpoint para manejar consultas de chat sin utilizar embeddings
+    Chat con RAG (Retrieval Augmented Generation) - busca en documentos
     
     Args:
-        chat_request: Objeto ChatRequest con la consulta del usuario
+        chat_request: Mensaje del usuario y configuración
+        provider: "llama" o "gemini" (debe coincidir con embeddings de documentos)
         
     Returns:
-        ChatResponse con la respuesta generada
+        Respuesta con contexto de documentos
     """
-    # Respuesta simulada por ahora
-    response_text = f"Respuesta generada para la consulta: {chat_request.query}"
+    if provider not in ["llama", "gemini"]:
+        raise HTTPException(status_code=400, detail="Provider debe ser 'llama' o 'gemini'")
     
-    return ChatResponse(answer=response_text)
+    try:
+        result = chat_service.get_rag_response(
+            message=chat_request.message,
+            provider=provider,
+            n_results=chat_request.n_results
+        )
+        
+        return ChatResponse(
+            response=result["response"],
+            success=True,
+            sources=result.get("sources"),
+            metadatas=result.get("metadatas"),
+            found_documents=result.get("found_documents")
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en el chat RAG: {str(e)}")
+
+
+@router.post("/conversation", response_model=ChatResponse)
+async def chat_with_history(
+    chat_request: ChatWithHistoryRequest,
+    provider: str = Query(default="llama", description="Provider: 'llama' o 'gemini'")
+):
+    """
+    Chat con historial de conversación (y opcionalmente RAG)
+    
+    Args:
+        chat_request: Mensaje, historial y configuración
+        provider: "llama" o "gemini"
+        
+    Returns:
+        Respuesta considerando el historial
+    """
+    if provider not in ["llama", "gemini"]:
+        raise HTTPException(status_code=400, detail="Provider debe ser 'llama' o 'gemini'")
+    
+    try:
+        result = chat_service.get_response_with_history(
+            message=chat_request.message,
+            chat_history=chat_request.chat_history,
+            provider=provider,
+            use_rag=chat_request.use_rag,
+            n_results=chat_request.n_results
+        )
+        
+        return ChatResponse(
+            response=result["response"],
+            success=True,
+            sources=result.get("sources"),
+            metadatas=result.get("metadatas"),
+            found_documents=result.get("found_documents")
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en el chat con historial: {str(e)}")
