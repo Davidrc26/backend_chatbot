@@ -14,7 +14,6 @@ class Settings(BaseSettings):
     
     # ChromaDB Configuration
     CHROMA_DB_PATH: str = "./chroma_db"  # Ruta para la persistencia de ChromaDB
-    CHROMA_COLLECTION_NAME: str = "documents_collection"
     
     # Gemini Configuration
     GOOGLE_API_KEY: str = ""  # API Key de Google Gemini
@@ -22,9 +21,6 @@ class Settings(BaseSettings):
     # Ollama Configuration
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     OLLAMA_MODEL: str = "llama3.1:latest"
-    
-    # Embedding Provider: "gemini" o "ollama"
-    EMBEDDING_PROVIDER: str = "ollama"
 
     class Config:
         env_file = ".env"

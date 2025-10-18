@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, Query
 from typing import List
 import uuid
 from datetime import datetime
@@ -17,16 +17,24 @@ router = APIRouter(prefix="/documents", tags=["documents"])
 
 
 @router.post("/upload-file", response_model=DocumentResponse)
-async def upload_file(file: UploadFile = File(...)):
+async def upload_file(
+    file: UploadFile = File(...),
+    provider: str = Query(default="llama", description="Provider de embeddings: 'llama' o 'gemini'")
+):
     """
-    Endpoint para subir un archivo PDF a ChromaDB con embeddings de Gemini
+    Endpoint para subir un archivo PDF a ChromaDB con embeddings
     
     Args:
         file: Archivo PDF a procesar
+        provider: "llama" o "gemini" - elige qué modelo usar para embeddings
         
     Returns:
         DocumentResponse con el ID y mensaje de confirmación
     """
+    # Validar provider
+    if provider not in ["llama", "gemini"]:
+        raise HTTPException(status_code=400, detail="Provider debe ser 'llama' o 'gemini'")
+    
     # Validar que sea un PDF
     if not file.filename.endswith('.pdf'):
         raise HTTPException(status_code=400, detail="Solo se aceptan archivos PDF")
@@ -44,8 +52,8 @@ async def upload_file(file: UploadFile = File(...)):
         # Dividir en chunks
         chunks = pdf_service.split_text_into_chunks(text)
         
-        # Generar embeddings y guardar en ChromaDB
-        collection = chroma_service.get_collection()
+        # Obtener la colección según el provider
+        collection = chroma_service.get_collection(provider=provider)
         
         ids = []
         embeddings = []
@@ -57,8 +65,8 @@ async def upload_file(file: UploadFile = File(...)):
             chunk_id = f"{uuid.uuid4()}"
             ids.append(chunk_id)
             
-            # Generar embedding
-            embedding = embedding_service.generate_embedding(chunk)
+            # Generar embedding con el provider seleccionado
+            embedding = embedding_service.generate_embedding(chunk, provider=provider)
             embeddings.append(embedding)
             
             documents.append(chunk)
@@ -68,7 +76,8 @@ async def upload_file(file: UploadFile = File(...)):
                 "filename": file.filename,
                 "chunk_index": i,
                 "total_chunks": len(chunks),
-                "upload_date": datetime.now().isoformat()
+                "upload_date": datetime.now().isoformat(),
+                "provider": provider
             })
         
         # Guardar en ChromaDB
@@ -81,7 +90,7 @@ async def upload_file(file: UploadFile = File(...)):
         
         return DocumentResponse(
             id=ids[0],  # Retornamos el ID del primer chunk
-            message=f"PDF procesado exitosamente. {len(chunks)} chunks creados."
+            message=f"PDF procesado exitosamente con {provider}. {len(chunks)} chunks creados."
         )
         
     except Exception as e:
@@ -89,54 +98,136 @@ async def upload_file(file: UploadFile = File(...)):
 
 
 @router.post("/search", response_model=DocumentSearchResponse)
-async def search_documents(query: DocumentQuery):
+async def search_documents(
+    query: DocumentQuery,
+    provider: str = Query(default="llama", description="Provider de embeddings: 'llama' o 'gemini'")
+):
     """
     Endpoint para buscar documentos similares usando embeddings
     
     Args:
         query: Consulta con texto de búsqueda y número de resultados
+        provider: "llama" o "gemini" - debe coincidir con el usado al subir documentos
         
     Returns:
         DocumentSearchResponse con los documentos encontrados
     """
-    # TODO: Implementar la lógica de búsqueda
-    pass
+    # Validar provider
+    if provider not in ["llama", "gemini"]:
+        raise HTTPException(status_code=400, detail="Provider debe ser 'llama' o 'gemini'")
+    
+    try:
+        # Obtener la colección según el provider
+        collection = chroma_service.get_collection(provider=provider)
+        
+        # Generar embedding de la query
+        query_embedding = embedding_service.generate_query_embedding(
+            query.query, 
+            provider=provider
+        )
+        
+        # Buscar en ChromaDB
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=query.n_results
+        )
+        
+        return DocumentSearchResponse(
+            documents=results['documents'][0] if results['documents'] else [],
+            distances=results['distances'][0] if results['distances'] else [],
+            metadatas=results['metadatas'][0] if results['metadatas'] else []
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en la búsqueda: {str(e)}")
 
 
 @router.delete("/delete/{document_id}")
-async def delete_document(document_id: str):
+async def delete_document(
+    document_id: str,
+    provider: str = Query(default="llama", description="Provider de embeddings: 'llama' o 'gemini'")
+):
     """
     Endpoint para eliminar un documento de ChromaDB
     
     Args:
         document_id: ID del documento a eliminar
+        provider: "llama" o "gemini" - colección donde buscar el documento
         
     Returns:
         Mensaje de confirmación
     """
-    # TODO: Implementar la lógica de eliminación
-    pass
+    # Validar provider
+    if provider not in ["llama", "gemini"]:
+        raise HTTPException(status_code=400, detail="Provider debe ser 'llama' o 'gemini'")
+    
+    try:
+        collection = chroma_service.get_collection(provider=provider)
+        collection.delete(ids=[document_id])
+        
+        return {"message": f"Documento {document_id} eliminado exitosamente de la colección {provider}"}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error eliminando documento: {str(e)}")
 
 
 @router.get("/list")
-async def list_documents():
+async def list_documents(
+    provider: str = Query(default="llama", description="Provider de embeddings: 'llama' o 'gemini'")
+):
     """
     Endpoint para listar todos los documentos en ChromaDB
+    
+    Args:
+        provider: "llama" o "gemini" - colección a listar
     
     Returns:
         Lista de documentos con sus metadatos
     """
-    # TODO: Implementar la lógica de listado
-    pass
+    # Validar provider
+    if provider not in ["llama", "gemini"]:
+        raise HTTPException(status_code=400, detail="Provider debe ser 'llama' o 'gemini'")
+    
+    try:
+        collection = chroma_service.get_collection(provider=provider)
+        results = collection.get()
+        
+        return {
+            "provider": provider,
+            "count": len(results['ids']),
+            "documents": results['ids'],
+            "metadatas": results['metadatas']
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error listando documentos: {str(e)}")
 
 
 @router.get("/count")
-async def count_documents():
+async def count_documents(
+    provider: str = Query(default="llama", description="Provider de embeddings: 'llama' o 'gemini'")
+):
     """
     Endpoint para obtener el número total de documentos
+    
+    Args:
+        provider: "llama" o "gemini" - colección a contar
     
     Returns:
         Cantidad de documentos en la colección
     """
-    # TODO: Implementar la lógica de conteo
-    pass
+    # Validar provider
+    if provider not in ["llama", "gemini"]:
+        raise HTTPException(status_code=400, detail="Provider debe ser 'llama' o 'gemini'")
+    
+    try:
+        collection = chroma_service.get_collection(provider=provider)
+        count = collection.count()
+        
+        return {
+            "provider": provider,
+            "count": count
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error contando documentos: {str(e)}")

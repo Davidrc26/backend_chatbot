@@ -18,15 +18,37 @@ class ChromaDBService:
             )
         )
         
-        # Obtener o crear la colección
-        self.collection = self.client.get_or_create_collection(
-            name=settings.CHROMA_COLLECTION_NAME,
-            metadata={"hnsw:space": "cosine"}  # Usando similitud coseno
-        )
+        # Diccionario para cachear colecciones
+        self.collections = {}
     
-    def get_collection(self):
-        """Retorna la colección de ChromaDB"""
-        return self.collection
+    def get_collection(self, provider: str = "llama"):
+        """
+        Retorna la colección de ChromaDB según el provider
+        
+        Args:
+            provider: "llama" o "gemini"
+            
+        Returns:
+            Colección de ChromaDB
+        """
+        if provider not in ["llama", "gemini"]:
+            raise ValueError(f"Provider inválido: {provider}. Usar 'llama' o 'gemini'")
+        
+        # Si ya está en caché, retornarla
+        if provider in self.collections:
+            return self.collections[provider]
+        
+        # Crear o obtener la colección
+        collection_name = f"documents_{provider}"
+        collection = self.client.get_or_create_collection(
+            name=collection_name,
+            metadata={"hnsw:space": "cosine", "provider": provider}
+        )
+        
+        # Cachear la colección
+        self.collections[provider] = collection
+        
+        return collection
     
     def get_client(self):
         """Retorna el cliente de ChromaDB"""
