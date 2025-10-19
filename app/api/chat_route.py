@@ -47,7 +47,7 @@ async def chat_with_rag(
     Chat con RAG (Retrieval Augmented Generation) - busca en documentos
     
     Args:
-        chat_request: Mensaje del usuario y configuración
+        chat_request: Mensaje del usuario y configuración (incluye use_rerank)
         provider: "llama" o "gemini" (debe coincidir con embeddings de documentos)
         
     Returns:
@@ -60,7 +60,8 @@ async def chat_with_rag(
         result = chat_service.get_rag_response(
             message=chat_request.message,
             provider=provider,
-            n_results=chat_request.n_results
+            n_results=chat_request.n_results,
+            use_rerank=chat_request.use_rerank
         )
         
         return ChatResponse(
@@ -68,7 +69,8 @@ async def chat_with_rag(
             success=True,
             sources=result.get("sources"),
             metadatas=result.get("metadatas"),
-            found_documents=result.get("found_documents")
+            found_documents=result.get("found_documents"),
+            reranked=result.get("reranked")
         )
         
     except Exception as e:
@@ -81,10 +83,10 @@ async def chat_with_history(
     provider: str = Query(default="llama", description="Provider: 'llama' o 'gemini'")
 ):
     """
-    Chat con historial de conversación (y opcionalmente RAG)
+    Chat con historial de conversación (y opcionalmente RAG con reranking)
     
     Args:
-        chat_request: Mensaje, historial y configuración
+        chat_request: Mensaje, historial y configuración (incluye use_rerank)
         provider: "llama" o "gemini"
         
     Returns:
@@ -99,7 +101,8 @@ async def chat_with_history(
             chat_history=chat_request.chat_history,
             provider=provider,
             use_rag=chat_request.use_rag,
-            n_results=chat_request.n_results
+            n_results=chat_request.n_results,
+            use_rerank=chat_request.use_rerank
         )
         
         return ChatResponse(
@@ -107,7 +110,8 @@ async def chat_with_history(
             success=True,
             sources=result.get("sources"),
             metadatas=result.get("metadatas"),
-            found_documents=result.get("found_documents")
+            found_documents=result.get("found_documents"),
+            reranked=result.get("reranked")
         )
         
     except Exception as e:
