@@ -56,12 +56,18 @@ class LLMService:
         context = "\n\n".join([f"Documento {i+1}:\n{doc}" for i, doc in enumerate(context_documents)])
         
         # Prompt con contexto
-        prompt = f"""Basándote en el siguiente contexto, responde la pregunta del usuario.
+        prompt = f"""Eres un asistente experto. Responde SOLO basándote en el contexto.
+Si no hay info suficiente, di "No tengo información suficiente".
 
 Contexto:
 {context}
 
 Pregunta: {message}
+
+Instrucciones:
+- Cita los documentos que uses
+- Sé específico y preciso
+- No inventes información
 
 Respuesta:"""
         
