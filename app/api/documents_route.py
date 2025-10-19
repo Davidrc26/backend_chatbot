@@ -1,5 +1,5 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException, Query
-from typing import List
+from fastapi import APIRouter, UploadFile, File, HTTPException, Query, Form
+from typing import List, Optional
 import uuid
 from datetime import datetime
 from app.schemas.document import (
@@ -18,15 +18,23 @@ router = APIRouter(prefix="/documents", tags=["documents"])
 
 @router.post("/upload-file", response_model=DocumentResponse)
 async def upload_file(
-    file: UploadFile = File(...),
-    provider: str = Query(default="llama", description="Provider de embeddings: 'llama' o 'gemini'")
+    file: UploadFile = File(..., description="Archivo PDF a procesar"),
+    provider: str = Form(default="llama", description="Provider de embeddings: 'llama' o 'gemini'"),
+    author: Optional[str] = Form(None, description="Autor del documento"),
+    category: Optional[str] = Form(None, description="Categoría del documento"),
+    tags: Optional[str] = Form(None, description="Tags separados por comas (ej: 'python,fastapi,tutorial')"),
+    year: Optional[str] = Form(None, description="Año del documento"),
 ):
     """
-    Endpoint para subir un archivo PDF a ChromaDB con embeddings
+    Endpoint para subir un archivo PDF a ChromaDB con embeddings y metadatos personalizados
     
     Args:
         file: Archivo PDF a procesar
         provider: "llama" o "gemini" - elige qué modelo usar para embeddings
+        author: Autor del documento (opcional)
+        category: Categoría del documento (opcional)
+        tags: Tags separados por comas (opcional)
+        year: Año del documento (opcional)
         
     Returns:
         DocumentResponse con el ID y mensaje de confirmación
@@ -55,6 +63,24 @@ async def upload_file(
         # Obtener la colección según el provider
         collection = chroma_service.get_collection(provider=provider)
         
+        # Preparar metadatos personalizados base
+        custom_metadata = {
+            "filename": file.filename,
+            "upload_date": datetime.now().isoformat(),
+            "provider": provider,
+        }
+        
+        # Agregar metadatos opcionales solo si se proporcionaron
+        if author:
+            custom_metadata["author"] = author
+        if category:
+            custom_metadata["category"] = category
+        if tags:
+            # Convertir string de tags a lista
+            custom_metadata["tags"] = [tag.strip() for tag in tags.split(",")]
+        if year:
+            custom_metadata["year"] = year
+
         ids = []
         embeddings = []
         documents = []
@@ -71,14 +97,13 @@ async def upload_file(
             
             documents.append(chunk)
             
-            # Metadata
-            metadatas.append({
-                "filename": file.filename,
+            # Combinar metadata base con metadata personalizada
+            chunk_metadata = {
+                **custom_metadata,
                 "chunk_index": i,
-                "total_chunks": len(chunks),
-                "upload_date": datetime.now().isoformat(),
-                "provider": provider
-            })
+                "total_chunks": len(chunks)
+            }
+            metadatas.append(chunk_metadata)
         
         # Guardar en ChromaDB
         collection.add(
@@ -88,9 +113,19 @@ async def upload_file(
             metadatas=metadatas
         )
         
+        # Construir mensaje de respuesta
+        metadata_info = []
+        if author:
+            metadata_info.append(f"Autor: {author}")
+        if category:
+            metadata_info.append(f"Categoría: {category}")
+        if year:
+            metadata_info.append(f"Año: {year}")
+        metadata_summary = " | ".join(metadata_info) if metadata_info else "Sin metadatos adicionales"
+        
         return DocumentResponse(
             id=ids[0],  # Retornamos el ID del primer chunk
-            message=f"PDF procesado exitosamente con {provider}. {len(chunks)} chunks creados."
+            message=f"PDF procesado exitosamente con {provider}. {len(chunks)} chunks creados. {metadata_summary}"
         )
         
     except Exception as e:
