@@ -5,7 +5,7 @@ from typing import List
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Backend Chatbot"
     API_V1_STR: str = "/api/v1"
-    BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:8000"]
+    BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:8000", "http://localhost:5173"]
     
     # Server Configuration
     HOST: str = "0.0.0.0"

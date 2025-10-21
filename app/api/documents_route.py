@@ -77,7 +77,7 @@ async def upload_file(
             custom_metadata["category"] = category
         if tags:
             # Convertir string de tags a lista
-            custom_metadata["tags"] = [tag.strip() for tag in tags.split(",")]
+            custom_metadata["tags"] = tags
         if year:
             custom_metadata["year"] = year
 
