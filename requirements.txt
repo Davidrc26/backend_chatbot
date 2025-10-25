@@ -9,3 +9,4 @@ chromadb
 google-generativeai
 pypdf2
 ollama
+python-telegram-bot

@@ -26,6 +26,12 @@ class Settings(BaseSettings):
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     OLLAMA_MODEL: str = "llama3.1:latest"
 
+    # Telegram Bot Configuration
+    TELEGRAM_BOT_TOKEN: str
+    TELEGRAM_POLLING: bool = True
+    TELEGRAM_DEFAULT_MODE: str = "breve"
+    TELEGRAM_REQUEST_TIMEOUT: int = 10
+    
     class Config:
         env_file = ".env"
         case_sensitive = True
