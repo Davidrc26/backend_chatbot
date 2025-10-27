@@ -1,4 +1,4 @@
-import PyPDF2
+import pypdf
 from io import BytesIO
 from typing import List
 import re
@@ -21,7 +21,7 @@ class PDFService:
             Texto extraído del PDF
         """
         pdf_file = BytesIO(file_content)
-        pdf_reader = PyPDF2.PdfReader(pdf_file)
+        pdf_reader = pypdf.PdfReader(pdf_file)
         
         text = ""
         for page in pdf_reader.pages:
