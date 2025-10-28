@@ -11,7 +11,7 @@ from app.schemas.document import (
 from app.services.chroma_service import chroma_service
 from app.services.pdf_service import pdf_service
 from app.services.embedding_service import embedding_service
-from app.services.langchain_service import langchain_service
+from app.services.llamaIndex import llamaindex_service
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
@@ -271,53 +271,82 @@ async def count_documents(
 
 @router.post("/upload-file-langchain", response_model=DocumentResponse)
 async def upload_file_langchain(
-    file: UploadFile = File(..., description="Archivo PDF a procesar con LangChain"),
+    file: UploadFile = File(..., description="Archivo PDF a procesar con LlamaIndex"),
     provider: str = Form(default="llama", description="Provider de embeddings: 'llama' o 'gemini'"),
-    chunk_size: int = Form(default=1000, description="Tamaño de cada chunk de texto"),
-    chunk_overlap: int = Form(default=200, description="Overlap entre chunks"),
-    extraction_mode: str = Form(default="elements", description="Modo de extracción: 'elements', 'single' o 'paged'"),
+    buffer_size: int = Form(
+        default=1, 
+        description="Ventana de comparación semántica (1-3 recomendado)"
+    ),
+    breakpoint_percentile_threshold: int = Form(
+        default=95,
+        description="Umbral percentil para chunking semántico (50-95: menor=chunks más pequeños)"
+    ),
     author: Optional[str] = Form(None, description="Autor del documento"),
     category: Optional[str] = Form(None, description="Categoría del documento"),
     tags: Optional[str] = Form(None, description="Tags separados por comas (ej: 'python,fastapi,tutorial')"),
     year: Optional[str] = Form(None, description="Año del documento"),
 ):
     """
-    Endpoint para subir un archivo PDF a ChromaDB usando LangChain con UnstructuredPDFLoader
+    Endpoint para subir un archivo PDF a ChromaDB usando LlamaIndex con Semantic Chunking
     
-    Este endpoint utiliza UnstructuredPDFLoader para una extracción más robusta de PDFs,
-    incluyendo detección de elementos del documento (títulos, párrafos, tablas, etc.)
+    Este endpoint utiliza:
+    - SimpleDirectoryReader: Extracción simple y robusta de PDFs
+    - SemanticSplitterNodeParser: Chunking inteligente basado en similitud semántica (versión estable de LlamaIndex)
+    
+    SEMANTIC CHUNKING con LlamaIndex:
+    Divide el documento basándose en similitud semántica entre oraciones usando embeddings.
+    La implementación de LlamaIndex es más estable y madura que la de LangChain.
     
     Args:
         file: Archivo PDF a procesar
         provider: "llama" o "gemini" - elige qué modelo usar para embeddings
-        chunk_size: Tamaño de cada chunk (default: 1000)
-        chunk_overlap: Overlap entre chunks (default: 200)
-        extraction_mode: 
-            - "elements": Divide por elementos del documento (títulos, párrafos, tablas)
-            - "single": Todo el documento como un solo texto
-            - "paged": Divide por páginas
+        buffer_size: Ventana de comparación semántica
+            - 1: Compara oración por oración (más preciso, más chunks)
+            - 2-3: Compara múltiples oraciones (más contexto, menos chunks)
+        breakpoint_percentile_threshold: Control del tamaño de chunks
+            - 90-95: Chunks más grandes y conservadores (mejor para documentos técnicos)
+            - 70-85: Tamaño medio (uso general)
+            - 50-70: Chunks más pequeños y precisos (mejor para búsquedas específicas)
         author: Autor del documento (opcional)
         category: Categoría del documento (opcional)
         tags: Tags separados por comas (opcional)
         year: Año del documento (opcional)
         
     Returns:
-        DocumentResponse con el ID y mensaje de confirmación
+        DocumentResponse con el ID de la colección y detalles del procesamiento
+        
+    Ejemplo de uso:
+        - Para documentos técnicos/legales: breakpoint_percentile_threshold=95, buffer_size=1
+        - Para uso general: breakpoint_percentile_threshold=85, buffer_size=2
+        - Para búsquedas precisas: breakpoint_percentile_threshold=70, buffer_size=1
     """
     # Validar provider
     if provider not in ["llama", "gemini"]:
-        raise HTTPException(status_code=400, detail="Provider debe ser 'llama' o 'gemini'")
-    
-    # Validar extraction_mode
-    if extraction_mode not in ["elements", "single", "paged"]:
         raise HTTPException(
             status_code=400, 
-            detail="extraction_mode debe ser 'elements', 'single' o 'paged'"
+            detail="Provider debe ser 'llama' o 'gemini'"
+        )
+    
+    # Validar buffer_size
+    if buffer_size < 1 or buffer_size > 5:
+        raise HTTPException(
+            status_code=400,
+            detail="buffer_size debe estar entre 1 y 5"
+        )
+    
+    # Validar breakpoint_percentile_threshold
+    if breakpoint_percentile_threshold < 50 or breakpoint_percentile_threshold > 99:
+        raise HTTPException(
+            status_code=400,
+            detail="breakpoint_percentile_threshold debe estar entre 50 y 99"
         )
     
     # Validar que sea un PDF
     if not file.filename.endswith('.pdf'):
-        raise HTTPException(status_code=400, detail="Solo se aceptan archivos PDF")
+        raise HTTPException(
+            status_code=400, 
+            detail="Solo se aceptan archivos PDF"
+        )
     
     try:
         # Leer el contenido del archivo
@@ -334,34 +363,51 @@ async def upload_file_langchain(
         if year:
             custom_metadata["year"] = year
         
-        # Procesar PDF con LangChain Service
-        result = langchain_service.process_pdf_and_store(
+        # Procesar PDF con LlamaIndex Service (Semantic Chunking)
+        result = llamaindex_service.process_pdf_and_store(
             file_content=content,
             filename=file.filename,
             provider=provider,
-            chunk_size=chunk_size,
-            chunk_overlap=chunk_overlap,
-            extraction_mode=extraction_mode,
+            buffer_size=buffer_size,
+            breakpoint_percentile_threshold=breakpoint_percentile_threshold,
             metadata=custom_metadata if custom_metadata else None
         )
         
-        # Construir mensaje de respuesta con metadata
-        metadata_info = []
-        if author:
-            metadata_info.append(f"Autor: {author}")
-        if category:
-            metadata_info.append(f"Categoría: {category}")
-        if year:
-            metadata_info.append(f"Año: {year}")
-        metadata_summary = " | ".join(metadata_info) if metadata_info else "Sin metadatos adicionales"
+        # Construir mensaje de respuesta con detalles
+        details = []
+        details.append(f"📄 {result['original_documents']} documentos extraídos")
+        details.append(f"🧩 {result['chunks_created']} chunks semánticos creados")
+        details.append(f"🤖 Provider: {provider.upper()}")
+        details.append(f"📊 Estrategia: Semantic (LlamaIndex)")
+        details.append(f"🎯 Umbral: {breakpoint_percentile_threshold}%")
+        details.append(f"🔄 Buffer: {buffer_size}")
         
-        message = f"{result['message']} | {metadata_summary}"
+        if author:
+            details.append(f"✍️ Autor: {author}")
+        if category:
+            details.append(f"📁 Categoría: {category}")
+        if year:
+            details.append(f"📅 Año: {year}")
+        if tags:
+            details.append(f"🏷️ Tags: {tags}")
+        
+        message = " | ".join(details)
         
         return DocumentResponse(
             id=result['collection_name'],
             message=message
         )
         
+    except ValueError as e:
+        # Errores de validación o configuración
+        raise HTTPException(
+            status_code=400, 
+            detail=f"Error de configuración: {str(e)}"
+        )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error procesando el archivo: {str(e)}")
+        # Otros errores (procesamiento, embeddings, etc.)
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Error procesando el archivo: {str(e)}"
+        )
     
