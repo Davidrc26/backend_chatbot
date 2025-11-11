@@ -43,7 +43,7 @@ class LlamaIndexService:
             )
         else:  # llama/ollama
             return OllamaEmbedding(
-                model_name="llama3.1:8b",
+                model_name=settings.OLLAMA_MODEL,
                 base_url=settings.OLLAMA_BASE_URL
             )
     
