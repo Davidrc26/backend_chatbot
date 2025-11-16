@@ -1,0 +1,184 @@
+{
+  "provider_rag": "gemini",
+  "fecha_evaluacion": "2025-11-15T19:12:26Z",
+  "resultados": [
+    {
+      "id": 1,
+      "archivo": "Agent Theories, Architectures, and Languages: A Survey\n",
+      "pregunta": "¿Cuáles son los tres ejes principales del estudio de los agentes según Wooldridge y Jennings?\n",
+      "respuesta_esperada": "Los autores dividen el estudio de los agentes en tres áreas principales: Teorías de agentes (Agent theories): tratan de definir qué es un agente y cómo representar formalmente sus propiedades. Arquitecturas de agentes (Agent architectures): se enfocan en cómo construir agentes que cumplan con las propiedades esperadas, tanto en software como en hardware. Lenguajes de agentes (Agent languages): se centran en cómo programar agentes y qué primitivas o estructuras son adecuadas para su implementación.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:12:33Z"
+    },
+    {
+      "id": 2,
+      "archivo": "Agent Theories, Architectures, and Languages: A Survey\n",
+      "pregunta": "¿Qué diferencia existe entre un agente deliberativo y uno reactivo?\n",
+      "respuesta_esperada": "Un agente deliberativo se basa en modelos simbólicos del mundo y toma decisiones mediante razonamiento lógico o planificación (por ejemplo, STRIPS o IRMA). Un agente reactivo no utiliza representaciones simbólicas ni razonamiento complejo; responde directamente a los estímulos del entorno. Ejemplos de este tipo son los robots basados en la arquitectura de subsunción de Brooks.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:12:39Z"
+    },
+    {
+      "id": 13,
+      "archivo": "Ética de la inteligencia artificial\n",
+      "pregunta": "¿Cuál es la diferencia fundamental entre usar sistemas inteligentes y delegar en ellos decisiones humanas?\n",
+      "respuesta_esperada": "Adela Cortina señala que usar sistemas inteligentes como apoyo para la toma de decisiones no es lo mismo que delegar decisiones significativas en ellos. Los humanos deben servirse de la IA como herramienta, pero no sustituir su juicio moral o político por el de las máquinas, pues estas carecen de autonomía y valores propios.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:15:34Z"
+    },
+    {
+      "id": 16,
+      "archivo": "Ética de la inteligencia artificial\n",
+      "pregunta": "¿Qué papel juega el principio de explicabilidad en la ética de la IA según Cortina?\n",
+      "respuesta_esperada": "El principio de explicabilidad asegura que los ciudadanos comprendan cómo los algoritmos afectan sus vidas. Exige conocer quién diseña los sistemas, con qué sesgos y con qué objetivos, para evitar injusticias o decisiones automáticas inapelables. Sin esta transparencia, no puede hablarse de respeto a la autonomía humana ni de responsabilidad moral.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:16:26Z"
+    },
+    {
+      "id": 17,
+      "archivo": "Generative Artificial Intelligence: A Historical Perspective\n",
+      "pregunta": "¿Cuáles son las cuatro etapas históricas del desarrollo de la inteligencia artificial generativa (GAI) según el artículo?\n",
+      "respuesta_esperada": "El artículo identifica cuatro etapas clave en la evolución de la GAI: 1. Sistemas generativos basados en reglas (1950–1990): programas que seguían reglas diseñadas por expertos, como ELIZA. 2. Algoritmos generativos basados en modelos (1980–2000): uso de modelos estadísticos y gráficos como los modelos de Markov ocultos y las redes bayesianas. 3. Metodologías generativas profundas (2010 en adelante): aparición de redes neuronales profundas, GANs, VAEs y modelos de difusión. 4. Modelos fundacionales (foundation models) (2020 en adelante): grandes modelos como GPT y Gemini, entrenados con datos masivos y aplicables a múltiples tareas.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:16:33Z"
+    },
+    {
+      "id": 27,
+      "archivo": "Primera facultad de IA en Colombia\n",
+      "pregunta": "¿Cuál es la inversión estimada para la facultad y qué entidad aporta la mayor parte de los recursos?\n",
+      "respuesta_esperada": "La inversión total es de $54.137 millones, de los cuales $38.950 millones provienen del Ministerio TIC.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:18:42Z"
+    },
+    {
+      "id": 31,
+      "archivo": "MM-LLMs Recent Advances in MultiModal Large Language Models\n",
+      "pregunta": "¿Cómo se entrena un MM-LLM según el paper? Explica las dos etapas clave.\n",
+      "respuesta_esperada": "El entrenamiento se divide en dos fases principales: Multimodal Pre-Training (MM PT): se entrena el alineamiento entre modalidades. Por ejemplo, que una imagen y su descripción textual queden en el mismo espacio semántico. Aquí se ajustan sobre todo los proyectores (Input Projector y Output Projector), normalmente usando pares imagen-texto, video-texto o audio-texto. Multimodal Instruction Tuning (MM IT): después del pretraining, el modelo se afina con instrucciones en formato conversacional o de pregunta-respuesta multimodal, a veces incluyendo diálogo multi-turno. Esta fase también puede incluir RLHF (Reinforcement Learning from Human Feedback) para alinear las respuestas del modelo con la intención humana y hacerlo mejor siguiendo instrucciones. El resultado es que el modelo no solo entiende entradas multimodales, sino que también interactúa de forma más natural y generaliza a tareas nuevas siguiendo instrucciones.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:19:43Z"
+    },
+    {
+      "id": 41,
+      "archivo": "Responsible artificial intelligence governance\n",
+      "pregunta": "¿Qué problema intenta resolver el concepto de 'gobernanza de IA responsable' que proponen los autores?\n",
+      "respuesta_esperada": "Los autores dicen que existen muchos principios éticos de IA (como equidad, transparencia, seguridad), pero no está claro cómo llevar esos principios a la práctica real dentro de las organizaciones. La literatura es fragmentada, abstracta y carece de guías operativas. Por eso, el trabajo propone una definición y un marco de 'gobernanza de IA responsable' que conecte principios éticos con prácticas concretas para diseñar, ejecutar, monitorear y evaluar sistemas de IA durante todo su ciclo de vida.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:22:26Z"
+    },
+    {
+      "id": 42,
+      "archivo": "Responsible artificial intelligence governance\n",
+      "pregunta": "¿Cómo definen los autores la 'gobernanza de IA responsable'?\n",
+      "respuesta_esperada": "La definen como un conjunto de prácticas para desarrollar, desplegar y monitorear aplicaciones de IA de manera segura, confiable y ética, asegurando que la IA funcione apropiadamente durante todo su ciclo de vida. Esta gobernanza incluye asignar autoridad y control sobre los datos, establecer responsabilidades claras y crear incentivos y sanciones para usos adecuados de la información.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:22:32Z"
+    },
+    {
+      "id": 43,
+      "archivo": "Responsible artificial intelligence governance\n",
+      "pregunta": "¿Cuáles son los tres tipos de prácticas organizacionales que componen la gobernanza de IA responsable en el marco propuesto?\n",
+      "respuesta_esperada": "El marco describe tres tipos de prácticas: Prácticas estructurales: quién decide qué. Incluye comités, roles, responsabilidades y distribución de autoridad dentro (y fuera) de la organización. Prácticas procedimentales: cómo se hace. Son los procesos para planear, auditar, monitorear riesgos, manejar datos, responder incidentes y alinear la IA con la estrategia competitiva. Prácticas relacionales: quién trabaja con quién. Se trata de colaboración entre áreas, participación de actores externos, formación en 'alfabetización en IA responsable' y mecanismos para involucrar a las partes interesadas. Estas tres capas buscan que la responsabilidad no sea solo un documento ético, sino algo vivo en la operación diaria.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:22:38Z"
+    },
+    {
+      "id": 44,
+      "archivo": "Responsible artificial intelligence governance\n",
+      "pregunta": "¿Cuáles son las condiciones externas e internas que influyen (los 'antecedentes') en cómo una organización aplica la gobernanza de IA responsable?\n",
+      "respuesta_esperada": "El artículo identifica tres grandes fuerzas: Expectativas y normas sociales / regulación: cambios culturales, presión pública, regulación emergente (por ejemplo, leyes sobre IA) que empujan a las empresas a ser responsables. Valores y cultura organizacional: la forma en que la empresa ya toma decisiones, su estructura de poder, su tolerancia ética y su velocidad para adaptarse. Principios de IA responsable que la organización adopta: por ejemplo, transparencia, equidad, privacidad, seguridad, supervisión humana, bienestar social y ambiental. Estas fuerzas determinan qué tan en serio toma la empresa la responsabilidad en IA y cómo la traduce en procesos reales.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:23:20Z"
+    },
+    {
+      "id": 45,
+      "archivo": "Shaping the future of AI balancing innovation and ethics in global regulation\n",
+      "pregunta": "¿Por qué se dice que es urgente regular la IA a nivel global y no solo a nivel nacional?\n",
+      "respuesta_esperada": "Porque la IA ya está metida en sectores críticos (salud, finanzas, transporte, vigilancia) y puede tomar decisiones autónomas que afectan derechos humanos, privacidad, seguridad y equidad social. Hoy no existe un marco unificado: la Unión Europea tiene protecciones fuertes como el GDPR (incluyendo derechos como el derecho a explicación), mientras que otras regiones no tienen marcos comparables, lo que crea un paisaje regulatorio fragmentado que dificulta cooperación internacional y control ético del impacto de la IA. Esto se agrava por riesgos como sesgos algorítmicos, vigilancia masiva, manipulación política y armas autónomas.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:23:26Z"
+    },
+    {
+      "id": 48,
+      "archivo": "Shaping the future of AI balancing innovation and ethics in global regulation\n",
+      "pregunta": "¿Qué principios se proponen como base de un marco internacional de regulación de IA responsable?\n",
+      "respuesta_esperada": "El texto sugiere que cualquier marco global debería incluir al menos: Transparencia: entender cómo decide el sistema y garantizar derecho a explicación en decisiones de alto impacto. Rendición de cuentas: definir claramente quién es responsable cuando un sistema de IA causa daño o actúa de forma no ética. Equidad y no discriminación: evitar sesgos y asegurar que el modelo funcione de forma justa entre distintos grupos demográficos. Privacidad y protección de datos: proteger datos personales, exigir consentimiento informado y limitar usos indebidos. Seguridad y robustez: sistemas seguros frente a ciberataques y que no pongan en riesgo a las personas. Respeto a los derechos humanos y beneficio social: alinear la IA con dignidad humana, bienestar social y el interés público global.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:24:19Z"
+    },
+    {
+      "id": 49,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines\n",
+      "pregunta": "¿Cómo ha evolucionado la IA desde sistemas basados en reglas hasta inteligencia impulsada por datos?\n",
+      "respuesta_esperada": "Pasó de sistemas simbólicos/experto con reglas explícitas a un cambio de paradigma en los 80s con aprendizaje automático que aprende de datos; luego, en los 2000s, redes neuronales y deep learning impulsados por cómputo y big data lograron avances en visión, NLP y sistemas autónomos; hoy destacan modelos preentrenados a gran escala y la IA generativa, junto con desafíos éticos (sesgo, transparencia, impacto social).\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:24:25Z"
+    },
+    {
+      "id": 50,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines\n",
+      "pregunta": "¿Cuáles son tres limitaciones clave de los sistemas basados en reglas que motivaron el giro hacia el aprendizaje con datos?\n",
+      "respuesta_esperada": "a) Inflexibilidad: no se adaptan a situaciones nuevas no contempladas por las reglas. b) Problemas de escalabilidad: el número de reglas crece exponencialmente y se vuelve inmanejable. c) Fragilidad ante la incertidumbre: si la entrada no coincide exactamente con las reglas, fallan en entornos reales.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:24:32Z"
+    },
+    {
+      "id": 52,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines\n",
+      "pregunta": "Menciona dos tendencias de los 2020s y un ejemplo de aplicación para cada una.\n",
+      "respuesta_esperada": "Generative AI y LLMs: modelos como GPT-3/PaLM/Claude habilitan chatbots, asistentes y creación automática de contenido. IA en salud: diagnóstico por imagen (rayos X, MRI, CT), detección temprana y apoyo a descubrimiento de fármacos (incluido el caso COVID-19).\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:25:18Z"
+    },
+    {
+      "id": 53,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines\n",
+      "pregunta": "¿Qué es el 'boom de la ética de la IA' y qué lo causó?\n",
+      "respuesta_esperada": "El 'boom de la ética de la IA' describe el aumento explosivo de guías, marcos éticos y llamados a regulación alrededor de la IA. Esto ocurre porque el uso de IA creció muy rápido y empezó a generar riesgos reales: violaciones de privacidad, vigilancia masiva, discriminación algorítmica, problemas de seguridad, impactos ambientales y consecuencias no intencionadas que afectan especialmente a poblaciones vulnerables. Frente a eso, gobiernos, empresas, academia y sociedad civil comenzaron a publicar lineamientos éticos para intentar controlar el impacto de la IA.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:25:25Z"
+    },
+    {
+      "id": 55,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines\n",
+      "pregunta": "Cuáles son las principales brechas y problemas detectados en las guías éticas actuales sobre IA?\n",
+      "respuesta_esperada": "El estudio señala varias alertas: Sesgo geográfico y lingüístico: la mayoría de documentos proviene de Europa, Norteamérica y partes de Asia; regiones como África y América Latina están subrepresentadas, en parte por barreras de idioma y acceso. Poca representación de autoras mujeres: entre los documentos donde hay autores identificados, la mayoría de nombres inferidos son masculinos; además, en 66% de los textos ni siquiera se lista autoría, lo que dificulta evaluar diversidad. Énfasis en principios vagos y 'soft law': la gran mayoría de documentos son recomendaciones no vinculantes y no explican cómo implementar técnicamente esos principios ni cómo fiscalizarlos. Muy pocos proponen regulación legal obligatoria. Falta de atención a ciertos riesgos estructurales: temas como derechos laborales, impacto ambiental, sostenibilidad, desinformación y efectos a largo plazo (por ejemplo, autonomía letal de sistemas o riesgos existenciales) reciben mucha menos atención que transparencia y fairness. Estas brechas muestran que todavía no hay una gobernanza global equilibrada ni realmente aplicada en la práctica.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:25:38Z"
+    },
+    {
+      "id": 56,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines\n",
+      "pregunta": "¿Por qué la falta de regulación obligatoria en IA se considera un problema en las guías éticas actuales?\n",
+      "respuesta_esperada": "Muchas guías de ética de IA son 'soft law': recomendaciones, principios o marcos voluntarios sin fuerza legal. El problema es que describen valores como transparencia, equidad o protección de datos, pero casi nunca dicen cómo aplicarlos técnicamente ni quién es responsable si no se cumplen. Eso deja vacíos en rendición de cuentas, supervisión y fiscalización real, especialmente en sectores de alto impacto social donde la IA ya está tomando decisiones.\n",
+      "respuesta_recibida": "No tengo información suficiente.\n",
+      "similitud": 0,
+      "fecha": "2025-11-15T19:26:17Z"
+    }
+  ],
+  "resumen": {
+    "provider_rag": "gemini",
+    "total_preguntas_originales": 56,
+    "total_preguntas_filtradas": 19,
+    "similitud_promedio_original": 47.05,
+    "similitud_promedio_filtrada": 0
+  }
+}
