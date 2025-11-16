@@ -12,22 +12,123 @@ class PDFService:
     @staticmethod
     def extract_text(file_content: bytes) -> str:
         """
-        Extrae el texto de un archivo PDF
+        Extrae el texto de un archivo PDF y limpia información basura
         
         Args:
             file_content: Contenido del archivo PDF en bytes
             
         Returns:
-            Texto extraído del PDF
+            Texto extraído y limpiado del PDF
         """
         pdf_file = BytesIO(file_content)
         pdf_reader = pypdf.PdfReader(pdf_file)
         
         text = ""
         for page in pdf_reader.pages:
-            text += page.extract_text() + "\n"
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text + "\n"
         
-        return text.strip()
+        cleaned_text = PDFService._clean_extracted_text(text)
+        
+        return cleaned_text.strip()
+    
+    @staticmethod
+    def _clean_extracted_text(text: str) -> str:
+        """
+        Limpia el texto extraído del PDF removiendo basura común
+        
+        Args:
+            text: Texto extraído del PDF
+            
+        Returns:
+            Texto limpio
+        """
+        text = re.sub(r'[\x00-\x08\x0b-\x0c\x0e-\x1f\x7f-\x9f]', '', text)
+        
+    
+        text = re.sub(r'(.)\1{10,}', '', text)
+        
+    
+        lines = text.split('\n')
+        cleaned_lines = []
+        
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            
+            special_chars = len(re.findall(r'[^a-zA-Z0-9\s\.,;:¿?¡!\-áéíóúÁÉÍÓÚñÑüÜ]', line))
+            total_chars = len(line)
+            
+           
+            if total_chars > 0 and (special_chars / total_chars) > 0.4:
+                continue
+        
+            if len(line) < 15 and re.match(r'^[\d\s\-\|\.]+$', line):
+                continue
+            
+            footer_patterns = [
+                r'^\s*p[aá]gina\s+\d+\s*$',
+                r'^\s*page\s+\d+\s*$',
+                r'^\s*\d+\s*/\s*\d+\s*$',
+                r'^\s*\d+\s+de\s+\d+\s*$',
+                r'^\s*\[\s*\d+\s*\]\s*$',
+                r'^\s*-\s*\d+\s*-\s*$'
+            ]
+            
+            is_footer = any(re.match(pattern, line.lower()) for pattern in footer_patterns)
+            if is_footer:
+                continue
+            
+            if re.match(r'^(https?://|www\.|[\w\.-]+@[\w\.-]+).*$', line) and len(line) < 100:
+                continue
+            
+            cleaned_lines.append(line)
+        
+        text = '\n'.join(cleaned_lines)
+        
+        text = re.sub(r' {2,}', ' ', text)
+        
+        text = re.sub(r'\n{4,}', '\n\n\n', text)
+        
+        text = '\n'.join(line.strip() for line in text.split('\n'))
+        
+        text = PDFService._remove_repetitive_headers(text)
+        
+        return text
+    
+    @staticmethod
+    def _remove_repetitive_headers(text: str) -> str:
+        """
+        Elimina encabezados y pies de página repetitivos que aparecen en múltiples páginas
+        
+        Args:
+            text: Texto a limpiar
+            
+        Returns:
+            Texto sin líneas repetitivas
+        """
+        lines = text.split('\n')
+        line_frequency = {}
+        for line in lines:
+            stripped = line.strip()
+            if stripped and len(stripped) < 100:
+                line_frequency[stripped] = line_frequency.get(stripped, 0) + 1
+        
+
+        repetitive_lines = {line for line, count in line_frequency.items() if count > 3}
+        
+    
+        cleaned_lines = []
+        for line in lines:
+            stripped = line.strip()
+            if stripped and stripped not in repetitive_lines:
+                cleaned_lines.append(line)
+            elif not stripped:
+                cleaned_lines.append('')  
+        
+        return '\n'.join(cleaned_lines)
     
     @staticmethod
     def split_text_into_chunks(text: str, chunk_size: int = 1000, overlap: int = 200) -> List[str]:
