@@ -104,7 +104,7 @@ Respuesta:"""
     
     def _get_gemini_response(self, prompt: str) -> str:
         """Genera respuesta usando Gemini"""
-        model = genai.GenerativeModel('gemini-2.0-flash-exp')
+        model = genai.GenerativeModel('gemini-2.5-flash-lite')
         response = model.generate_content(prompt)
         return response.text
     
@@ -124,7 +124,7 @@ Respuesta:"""
         chat_history: List[Dict[str, str]]
     ) -> str:
         """Genera respuesta con historial usando Gemini"""
-        model = genai.GenerativeModel('gemini-2.0-flash-exp')
+        model = genai.GenerativeModel('gemini-2.0-flash-lite')
         
         # Convertir historial al formato de Gemini
         chat = model.start_chat(history=[
