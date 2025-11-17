@@ -93,7 +93,14 @@ get_rag_response() {
         -H "Content-Type: application/json" \
         -d "$json_payload")
     
-    echo "$response" | python3 -c "import json, sys; data = json.load(sys.stdin); print(data.get('response', ''))"
+    echo "$response" | python3 -c "
+import json, sys
+try:
+    data = json.load(sys.stdin)
+    print(data.get('response', '').strip())
+except:
+    print('')
+"
 }
 
 # Función para calcular similitud usando Gemini
