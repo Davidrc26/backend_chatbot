@@ -2,6 +2,7 @@ import google.generativeai as genai
 import ollama
 from app.core.config import settings
 from typing import List, Dict
+import time
 
 
 class LLMService:
@@ -102,11 +103,34 @@ Respuesta:"""
         else:
             raise ValueError(f"Provider no soportado: {provider}")
     
-    def _get_gemini_response(self, prompt: str) -> str:
-        """Genera respuesta usando Gemini"""
+    def _get_gemini_response(self, prompt: str, max_retries: int = 3) -> str:
+        """
+        Genera respuesta usando Gemini con reintentos automáticos
+        
+        Args:
+            prompt: El prompt a enviar
+            max_retries: Número máximo de reintentos en caso de error
+            
+        Returns:
+            Respuesta de Gemini
+        """
         model = genai.GenerativeModel('gemini-2.0-flash-lite')
-        response = model.generate_content(prompt)
-        return response.text
+        
+        for attempt in range(max_retries):
+            try:
+                response = model.generate_content(prompt)
+                return response.text
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    # Esperar con backoff exponencial: 2s, 4s, 8s
+                    wait_time = 2 ** (attempt + 1)
+                    print(f"⚠️  Error en Gemini (intento {attempt + 1}/{max_retries}): {str(e)}")
+                    print(f"   Reintentando en {wait_time}s...")
+                    time.sleep(wait_time)
+                else:
+                    # Último intento falló
+                    print(f"❌ Error en Gemini después de {max_retries} intentos: {str(e)}")
+                    raise Exception(f"Gemini API error después de {max_retries} intentos: {str(e)}")
     
     def _get_llama_response(self, prompt: str) -> str:
         """Genera respuesta usando Llama (Ollama)"""
@@ -121,22 +145,44 @@ Respuesta:"""
     def _get_gemini_response_with_history(
         self,
         message: str,
-        chat_history: List[Dict[str, str]]
+        chat_history: List[Dict[str, str]],
+        max_retries: int = 3
     ) -> str:
-        """Genera respuesta con historial usando Gemini"""
+        """
+        Genera respuesta con historial usando Gemini con reintentos automáticos
+        
+        Args:
+            message: Mensaje actual
+            chat_history: Historial de conversación
+            max_retries: Número máximo de reintentos
+            
+        Returns:
+            Respuesta de Gemini
+        """
         model = genai.GenerativeModel('gemini-2.0-flash-lite')
         
-        # Convertir historial al formato de Gemini
-        chat = model.start_chat(history=[
-            {
-                'role': 'user' if msg['role'] == 'user' else 'model',
-                'parts': [msg['content']]
-            }
-            for msg in chat_history
-        ])
-        
-        response = chat.send_message(message)
-        return response.text
+        for attempt in range(max_retries):
+            try:
+                # Convertir historial al formato de Gemini
+                chat = model.start_chat(history=[
+                    {
+                        'role': 'user' if msg['role'] == 'user' else 'model',
+                        'parts': [msg['content']]
+                    }
+                    for msg in chat_history
+                ])
+                
+                response = chat.send_message(message)
+                return response.text
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait_time = 2 ** (attempt + 1)
+                    print(f"⚠️  Error en Gemini con historial (intento {attempt + 1}/{max_retries}): {str(e)}")
+                    print(f"   Reintentando en {wait_time}s...")
+                    time.sleep(wait_time)
+                else:
+                    print(f"❌ Error en Gemini después de {max_retries} intentos: {str(e)}")
+                    raise Exception(f"Gemini API error después de {max_retries} intentos: {str(e)}")
     
     def _get_llama_response_with_history(
         self,

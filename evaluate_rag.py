@@ -27,7 +27,7 @@ class RAGEvaluator:
     def __init__(self, base_url: str = "http://localhost:8000/api/v1"):
         self.base_url = base_url
         self.request_count = 0
-        self.request_limit = 8
+        self.request_limit = 15  # Aumentado de 8 a 15
         self.start_time = time.time()
         
     def check_rate_limit(self):
@@ -153,7 +153,7 @@ Responde ÚNICAMENTE con este formato JSON:
                 endpoint,
                 json=payload,
                 headers={"Content-Type": "application/json"},
-                timeout=30
+                timeout=120  # 2 minutos para la evaluación con Gemini
             )
             response.raise_for_status()
             data = response.json()
@@ -273,7 +273,7 @@ Responde ÚNICAMENTE con este formato JSON:
             print("  → Consultando endpoint RAG...")
             self.check_rate_limit()
             respuesta_recibida = self.get_rag_response(pregunta, provider, n_results=num_documento)
-            time.sleep(2)
+            time.sleep(3)  # Aumentado de 2 a 3 segundos
             
             if not respuesta_recibida:
                 print(f"{Colors.RED}  ✗ Error: No se obtuvo respuesta del RAG{Colors.NC}\n")
@@ -295,7 +295,7 @@ Responde ÚNICAMENTE con este formato JSON:
                 print("  → Evaluando respuesta con criterios múltiples...")
                 self.check_rate_limit()
                 scores = self.calculate_similarity(respuesta_esperada, respuesta_recibida)
-                time.sleep(2)
+                time.sleep(4)  # Aumentado de 2 a 4 segundos para evaluación
                 
                 if scores is None:
                     print(f"{Colors.RED}  ✗ No se pudo evaluar la respuesta{Colors.NC}")
@@ -425,7 +425,7 @@ def main():
     
     # Configuración
     input_file = "app/assets/preguntas_respuestas.json"
-    output_file = f"resultados_evaluacion_{provider}.json"
+    output_file = f"resultados_evaluacion_clean_{provider}.json"
     
     # Crear evaluador y ejecutar
     evaluator = RAGEvaluator()
