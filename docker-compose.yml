@@ -1,0 +1,53 @@
+# Docker Compose para Backend Chatbot + Frontend
+
+services:
+  # Servicio Backend (FastAPI)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chatbot_backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - BACKEND_BASE_URL=http://backend:8000
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - HOST=0.0.0.0
+      - PORT=8000
+    volumes:
+      - ./chroma_db:/app/chroma_db
+      - .:/app
+    networks:
+      - chatbot_network
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build:
+      context: ../front_chatbot
+      dockerfile: Dockerfile
+    container_name: chatbot_frontend
+    ports:
+      - "3000:3000" 
+    depends_on:
+      - backend
+    networks:
+      - chatbot_network
+    restart: unless-stopped
+
+networks:
+  chatbot_network:
+    driver: bridge
+
+volumes:
+  chroma_db_data:
+    driver: local

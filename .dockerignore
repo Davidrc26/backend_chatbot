@@ -1,0 +1,75 @@
+# Ignorar archivos en la imagen Docker
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Entorno virtual
+.venv/
+venv/
+
+# Variables de entorno locales
+.env
+.env.local
+
+# Base de datos local
+chroma_db/
+*.db
+*.sqlite
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Docs y scripts de evaluación
+*.md
+evaluate_*.sh
+filter_results.sh
+resultados_*.json
+EVALUACION_README.md
+LANGCHAIN_USAGE.md
