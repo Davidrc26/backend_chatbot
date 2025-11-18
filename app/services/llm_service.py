@@ -114,7 +114,7 @@ Respuesta:"""
         Returns:
             Respuesta de Gemini
         """
-        model = genai.GenerativeModel('gemini-2.0-flash-lite')
+        model = genai.GenerativeModel('gemini-2.5-flash-lite')
         
         for attempt in range(max_retries):
             try:
@@ -159,7 +159,7 @@ Respuesta:"""
         Returns:
             Respuesta de Gemini
         """
-        model = genai.GenerativeModel('gemini-2.0-flash-lite')
+        model = genai.GenerativeModel('gemini-2.5-flash-lite')
         
         for attempt in range(max_retries):
             try:

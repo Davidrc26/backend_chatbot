@@ -27,7 +27,7 @@ class RAGEvaluator:
     def __init__(self, base_url: str = "http://localhost:8000/api/v1"):
         self.base_url = base_url
         self.request_count = 0
-        self.request_limit = 15  # Aumentado de 8 a 15
+        self.request_limit = 14  # Máximo 14 peticiones por minuto
         self.start_time = time.time()
         
     def check_rate_limit(self):
@@ -68,9 +68,13 @@ class RAGEvaluator:
         
         return None
     
-    def get_rag_response(self, question: str, provider: str, n_results: int = 3) -> Optional[str]:
-        """Obtiene respuesta del endpoint RAG"""
-        endpoint = f"{self.base_url}/chat/rag?provider={provider}"
+    def get_rag_response(self, question: str, provider: str, n_results: int = 3, use_llamaindex: bool = False) -> Optional[str]:
+        """Obtiene respuesta del endpoint RAG (normal o con LlamaIndex)"""
+        if use_llamaindex:
+            endpoint = f"{self.base_url}/chat/rag/with/llamaindex?provider={provider}"
+        else:
+            endpoint = f"{self.base_url}/chat/rag?provider={provider}"
+        
         payload = {
             "message": question,
             "n_results": n_results,
@@ -198,7 +202,11 @@ Responde ÚNICAMENTE con este formato JSON:
         """
         Calcula el score final usando la fórmula ponderada
         
-        Score = 0.35*Exactitud + 0.20*Cobertura + 0.15*Claridad + 0.20*Citas - 0.10*Alucinación - 0.05*Seguridad
+        Score = 0.35*Exactitud + 0.20*Cobertura + 0.15*Claridad + 0.20*Citas + 0.05*Alucinación + 0.05*Seguridad
+        
+        Todos los componentes suman (mayor es mejor):
+        - Alucinación: 100 = sin alucinación (bueno)
+        - Seguridad: 100 = muy seguro (bueno)
         
         Args:
             scores: Dict con los puntajes individuales
@@ -210,9 +218,9 @@ Responde ÚNICAMENTE con este formato JSON:
             0.35 * scores['exactitud'] +
             0.20 * scores['cobertura'] +
             0.15 * scores['claridad'] +
-            0.20 * scores['citas'] -
-            0.10 * (100 - scores['alucinacion']) -  # Invertir: menos alucinación es mejor
-            0.05 * (100 - scores['seguridad'])      # Invertir: más seguridad es mejor
+            0.20 * scores['citas'] +
+            0.05 * scores['alucinacion'] +    # Ahora SUMA (sin alucinación es bueno)
+            0.05 * scores['seguridad']        # Ahora SUMA (más seguridad es bueno)
         )
         
         return round(score, 2)
@@ -236,9 +244,10 @@ Responde ÚNICAMENTE con este formato JSON:
         
         return questions
     
-    def evaluate(self, provider: str, input_file: str, output_file: str):
+    def evaluate(self, provider: str, input_file: str, output_file: str, use_llamaindex: bool = False):
         """Ejecuta la evaluación completa"""
-        print(f"{Colors.GREEN}Iniciando evaluación del modelo RAG...{Colors.NC}\n")
+        rag_type = "LlamaIndex" if use_llamaindex else "Normal"
+        print(f"{Colors.GREEN}Iniciando evaluación del modelo RAG ({rag_type})...{Colors.NC}\n")
         
         # Cargar preguntas
         questions = self.load_questions(input_file)
@@ -272,7 +281,7 @@ Responde ÚNICAMENTE con este formato JSON:
             # Consultar RAG
             print("  → Consultando endpoint RAG...")
             self.check_rate_limit()
-            respuesta_recibida = self.get_rag_response(pregunta, provider, n_results=num_documento)
+            respuesta_recibida = self.get_rag_response(pregunta, provider, n_results=num_documento, use_llamaindex=use_llamaindex)
             time.sleep(3)  # Aumentado de 2 a 3 segundos
             
             if not respuesta_recibida:
@@ -360,7 +369,7 @@ Responde ÚNICAMENTE con este formato JSON:
         output_data = {
             "provider_rag": provider,
             "fecha_evaluacion": datetime.utcnow().isoformat() + 'Z',
-            "formula": "Score = 0.35*Exactitud + 0.20*Cobertura + 0.15*Claridad + 0.20*Citas - 0.10*(100-Alucinación) - 0.05*(100-Seguridad)",
+            "formula": "Score = 0.35*Exactitud + 0.20*Cobertura + 0.15*Claridad + 0.20*Citas + 0.05*Alucinación + 0.05*Seguridad",
             "resultados": results,
             "resumen": {
                 "provider_rag": provider,
@@ -403,6 +412,26 @@ Responde ÚNICAMENTE con este formato JSON:
 
 def main():
     """Función principal"""
+    # Solicitar tipo de endpoint RAG
+    print("Seleccione el tipo de endpoint RAG:")
+    print("1) RAG Normal (ChromaDB directo)")
+    print("2) RAG con LlamaIndex")
+    
+    while True:
+        rag_option = input("Ingrese su opción (1 o 2): ").strip()
+        if rag_option == "1":
+            use_llamaindex = False
+            rag_type_name = "normal"
+            break
+        elif rag_option == "2":
+            use_llamaindex = True
+            rag_type_name = "llamaindex"
+            break
+        else:
+            print("Opción inválida. Por favor ingrese 1 o 2.")
+    
+    print()
+    
     # Solicitar provider al usuario
     print("Seleccione el provider para el endpoint RAG:")
     print("1) llama")
@@ -420,16 +449,17 @@ def main():
             print("Opción inválida. Por favor ingrese 1 o 2.")
     
     print()
+    print(f"Tipo de RAG: {rag_type_name}")
     print(f"Provider seleccionado: {provider}")
     print()
     
     # Configuración
     input_file = "app/assets/preguntas_respuestas.json"
-    output_file = f"resultados_evaluacion_clean_{provider}.json"
+    output_file = f"resultados_evaluacion_{rag_type_name}_{provider}_gemini-2.5.json"
     
     # Crear evaluador y ejecutar
     evaluator = RAGEvaluator()
-    evaluator.evaluate(provider, input_file, output_file)
+    evaluator.evaluate(provider, input_file, output_file, use_llamaindex=use_llamaindex)
 
 
 if __name__ == "__main__":

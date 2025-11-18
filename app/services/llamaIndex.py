@@ -62,7 +62,7 @@ class LlamaIndexService:
         """
         if provider.lower() == "gemini":
             return Gemini(
-                model="models/gemini-2.0-flash-lite",
+                model="models/gemini-2.5-flash-lite",
                 api_key=settings.GOOGLE_API_KEY
             )
         else:  # llama/ollama
