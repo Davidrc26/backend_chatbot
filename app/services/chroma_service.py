@@ -50,7 +50,7 @@ class ChromaDBService:
             return self.collections[provider]
         
         # Crear o obtener la colección
-        collection_name = f"documents_{provider}"
+        collection_name = f"documents_cleaned_{provider}"
         collection = self.client.get_or_create_collection(
             name=collection_name,
             metadata={"hnsw:space": "cosine", "provider": provider}
