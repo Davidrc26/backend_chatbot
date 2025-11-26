@@ -86,7 +86,7 @@ class RAGEvaluator:
                 endpoint,
                 json=payload,
                 headers={"Content-Type": "application/json"},
-                timeout=30
+                timeout=300  # 2 minutos para Ollama (puede ser lento)
             )
             response.raise_for_status()
             data = response.json()
