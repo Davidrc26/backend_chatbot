@@ -1,0 +1,1028 @@
+{
+  "provider_rag": "gemini",
+  "fecha_evaluacion": "2025-11-18T00:37:01.781804Z",
+  "formula": "Score = 0.35*Exactitud + 0.20*Cobertura + 0.15*Claridad + 0.20*Citas + 0.05*Alucinación + 0.05*Seguridad",
+  "resultados": [
+    {
+      "id": 1,
+      "archivo": "Agent Theories, Architectures, and Languages: A Survey",
+      "pregunta": "¿Cuáles son los tres ejes principales del estudio de los agentes según Wooldridge y Jennings?",
+      "respuesta_esperada": "Los autores dividen el estudio de los agentes en tres áreas principales: Teorías de agentes (Agent theories): tratan de definir qué es un agente y cómo representar formalmente sus propiedades. Arquitecturas de agentes (Agent architectures): se enfocan en cómo construir agentes que cumplan con las propiedades esperadas, tanto en software como en hardware. Lenguajes de agentes (Agent languages): se centran en cómo programar agentes y qué primitivas o estructuras son adecuadas para su implementación.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 10.0,
+      "fecha": "2025-11-18T00:27:47.564675Z"
+    },
+    {
+      "id": 2,
+      "archivo": "Agent Theories, Architectures, and Languages: A Survey",
+      "pregunta": "¿Qué diferencia existe entre un agente deliberativo y uno reactivo?",
+      "respuesta_esperada": "Un agente deliberativo se basa en modelos simbólicos del mundo y toma decisiones mediante razonamiento lógico o planificación (por ejemplo, STRIPS o IRMA). Un agente reactivo no utiliza representaciones simbólicas ni razonamiento complejo; responde directamente a los estímulos del entorno. Ejemplos de este tipo son los robots basados en la arquitectura de subsunción de Brooks.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 25,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 10.0,
+      "fecha": "2025-11-18T00:27:56.862153Z"
+    },
+    {
+      "id": 3,
+      "archivo": "Agent Theories, Architectures, and Languages: A Survey",
+      "pregunta": "¿Qué plantea la teoría de la intención de Cohen y Levesque?",
+      "respuesta_esperada": "Cohen y Levesque proponen una lógica formal para representar la intención de los agentes como un equilibrio racional entre creencias y metas. Según ellos, los agentes deben: 1. Actuar conforme a sus intenciones. 2. Adoptar solo intenciones factibles. 3. Mantener o abandonar intenciones dependiendo del cambio de creencias. Esta teoría fue clave para modelar agentes racionales y la cooperación en sistemas multiagente.",
+      "respuesta_recibida": "La teoría de la intención de Cohen y Levesque plantea siete propiedades que debe satisfacer una teoría de intención razonable:\n\n1.  Las intenciones plantean problemas para los agentes, quienes necesitan determinar formas de lograrlas. (Documento 2)\n2.  Las intenciones proporcionan un \"filtro\" para adoptar otras intenciones, las cuales no deben entrar en conflicto. (Documento 2)\n3.  Los agentes hacen seguimiento del éxito de sus intenciones y tienden a intentarlo de nuevo si sus intentos fallan. (Documento 2)\n4.  Los agentes creen que sus intenciones son posibles. (Documento 2)\n5.  Los agentes no creen que no lograrán sus intenciones. (Documento 2)\n6.  Bajo ciertas circunstancias, los agentes creen que lograrán sus intenciones. (Documento 2)\n7.  Los agentes no necesitan tener la intención de todos los efectos secundarios esperados de sus intenciones. (Documento 2, Documento 3)\n\nPara formalizar esta teoría, Cohen y Levesque emplean un enfoque de dos niveles. Primero, construyen una lógica de agencia racional, definiendo las relaciones entre los operadores modales básicos. Sobre esta base, introducen constructos derivados que forman una \"teoría parcial de la acción racional\", siendo la intención uno de estos constructos. La lógica es un sistema multi-modal cuantificado y multi-ordenado con igualdad, que incluye cuatro modalidades primarias: (BELxϕ) el agente x cree ϕ, (GOAL xϕ) el agente x tiene la meta de ϕ, (HAPPENS α) la acción α ocurrirá a continuación, y (DONEα) la acción α acaba de ocurrir. Las semánticas de BEL y GOAL se dan a través de mundos posibles, asignando a cada agente una relación de accesibilidad de creencias y una relación de accesibilidad de metas. (Documento 3)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 70,
+        "cobertura": 60,
+        "claridad": 85,
+        "citas": 100,
+        "alucinacion": 80,
+        "seguridad": 100
+      },
+      "score_final": 78.25,
+      "fecha": "2025-11-18T00:28:06.717384Z"
+    },
+    {
+      "id": 4,
+      "archivo": "Agent Theories, Architectures, and Languages: A Survey",
+      "pregunta": "¿Qué es la programación orientada a agentes (Agent-Oriented Programming, AOP) según Shoham?",
+      "respuesta_esperada": "Shoham propone la AOP como un nuevo paradigma de programación donde los agentes se programan directamente usando nociones mentales como creencias, compromisos y habilidades. Su sistema AGENT0 permite especificar agentes con: Capacidades (acciones posibles), Creencias y compromisos iniciales, Reglas de compromiso que determinan su comportamiento ante mensajes o cambios de estado.",
+      "respuesta_recibida": "Según Shoham, la Programación Orientada a Agentes (AOP) es un \"nuevo paradigma de programación, basado en una visión societal de la computación\" (Documento 1, Documento 3). La idea fundamental de este paradigma es \"programar directamente agentes en términos de las nociones mentalistas e intencionales que los teóricos de agentes han desarrollado para representar las propiedades de los agentes\" (Documento 1). La motivación detrás de esta propuesta es que, de la misma manera que se utiliza la \"postura intencional\" para describir a los humanos, podría ser útil utilizarla para programar máquinas (Documento 1).\n\nShoham propone que un sistema AOP completamente desarrollado constará de tres componentes:\n* Un sistema lógico para definir el estado mental de los agentes.\n* Un lenguaje de programación interpretado para programar agentes.\n* Un proceso de \"agentiﬁcación\", para compilar programas de agentes en sistemas ejecutables de bajo nivel. (Documento 2)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 80,
+        "claridad": 85,
+        "citas": 70,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 84.0,
+      "fecha": "2025-11-18T00:28:15.977825Z"
+    },
+    {
+      "id": 5,
+      "archivo": "Algorithm, Ethics, and Risks of Artificial Intelligence: Implications for Human Rights",
+      "pregunta": "¿Cuáles son los principales riesgos éticos asociados al uso de la inteligencia artificial según el autor?",
+      "respuesta_esperada": "El texto identifica varios riesgos éticos clave: la falta de transparencia (la 'caja negra' algorítmica), la amplificación de sesgos preexistentes, la reducción de la supervisión humana en decisiones críticas y la vulneración de la privacidad a través de la vigilancia masiva. Estos problemas pueden provocar discriminación y erosionar derechos fundamentales como la intimidad y la libertad de expresión.",
+      "respuesta_recibida": "Los principales riesgos éticos asociados al uso de la inteligencia artificial, según el autor, son:\n\n*   **Sesgo en los datos y consecuencias perjudiciales:** Las decisiones y predicciones de la IA dependen de los datos con los que ha sido entrenada. Cualquier sesgo en estos datos se reflejará en el comportamiento del algoritmo, lo que puede resultar en consecuencias desiguales y perjudiciales para grupos históricamente relegados (Documento 1). Esto es especialmente relevante en el ámbito de la justicia, donde puede perpetuar prejuicios sociales (Documento 1).\n*   **Cuestiones éticas en procesos críticos:** La IA plantea cuestiones éticas, especialmente en procesos críticos como la justicia, la vigilancia o la gestión de riesgos, donde es necesario establecer límites éticos precisos para su uso y desarrollo (Documento 1).\n*   **Menoscabo de derechos y valores fundamentales:** Existe el riesgo de que el avance de la inteligencia artificial menoscabe los derechos y valores fundamentales de la humanidad si no se aborda de forma responsable, transparente y humanista (Documento 2).\n\nEl autor también señala que, por el momento, no se trata de una ética de los sistemas inteligentes en sí, sino de cómo orientar el uso humano de estos sistemas de forma ética (Documento 3).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 85,
+        "cobertura": 80,
+        "claridad": 90,
+        "citas": 80,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 85.0,
+      "fecha": "2025-11-18T00:28:25.318179Z"
+    },
+    {
+      "id": 6,
+      "archivo": "Algorithm, Ethics, and Risks of Artificial Intelligence: Implications for Human Rights",
+      "pregunta": "¿Qué relación existe entre la inteligencia artificial y la vulneración de los derechos humanos?",
+      "respuesta_esperada": "El autor explica que los algoritmos, al operar sobre datos cargados de prejuicios sociales, pueden perpetuar desigualdades y discriminaciones, afectando derechos como la igualdad ante la ley, la privacidad y la libertad individual. En el ámbito judicial y de seguridad, la IA puede transformarse en una herramienta de control en lugar de garantizar justicia y equidad.",
+      "respuesta_recibida": "La inteligencia artificial (IA) puede afectar los derechos humanos al vulnerar derechos como la intimidad y la libertad de expresión, especialmente en el uso de algoritmos dentro de la Administración de Justicia, como la vigilancia masiva, la predicción del delito y la gestión de riesgos (Documento 1). La IA, aunque prometedora, presenta riesgos cuando su desarrollo y aplicación se enfrentan a marcos regulatorios en construcción, planteando preguntas sobre cómo garantizar el respeto de los derechos humanos en un entorno con máquinas (Documento 2). La implementación de la IA sin una regulación adecuada puede profundizar desigualdades sociales y vulnerar principios democráticos esenciales, reproduciendo sesgos preexistentes y afectando de manera desigual a colectivos (Documento 3). El uso de algoritmos e IA en áreas críticas como la justicia o la seguridad pública introduce el riesgo de discriminación algorítmica, perpetuando y amplificando desigualdades sociales existentes e incluso generando nuevas formas de discriminación automatizada (Documento 3).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 95,
+        "cobertura": 90,
+        "claridad": 90,
+        "citas": 80,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 90.75,
+      "fecha": "2025-11-18T00:28:34.821876Z"
+    },
+    {
+      "id": 7,
+      "archivo": "Algorithm, Ethics, and Risks of Artificial Intelligence: Implications for Human Rights",
+      "pregunta": "¿Por qué se considera urgente establecer una regulación sobre la inteligencia artificial?",
+      "respuesta_esperada": "Porque el avance tecnológico supera la velocidad de la legislación actual. Sin marcos regulatorios claros, los algoritmos pueden vulnerar derechos fundamentales sin supervisión ni rendición de cuentas. La Agencia de los Derechos Fundamentales de la Unión Europea advierte que, sin regulación, los riesgos éticos y legales asociados con la IA podrían desbordar la capacidad de los sistemas de protección existentes.",
+      "respuesta_recibida": "Se considera urgente establecer una regulación sobre la inteligencia artificial debido a que su rápida adopción en diversos sectores, como el financiero, ha planteado nuevos desafíos para los marcos normativos tradicionales y ha generado la necesidad de regulaciones más adaptativas, específicas y globalmente armonizadas. A medida que estas tecnologías penetran procesos críticos, se hace evidente que las estructuras regulatorias actuales no están completamente preparadas para supervisar su uso responsable y ético. Además, los marcos legales deben evolucionar al mismo ritmo que la innovación tecnológica para incorporar principios de transparencia, equidad y trazabilidad, garantizando un uso ético, eficiente y seguro de la IA. (Documento 3)\n\nLa cumbre organizada por el gobierno francés en colaboración con la Comisión Europea y organismos internacionales se basó en cinco ejes temáticos, incluyendo la regulación y gobernanza de la IA, la seguridad y gestión de riesgos, el impacto social y laboral, y la ética y protección de los derechos humanos. Durante el evento se presentaron propuestas clave como la instauración de un marco normativo internacional y la creación de una agencia europea de supervisión de la IA. Asimismo, se destacó la importancia de establecer mecanismos de verificación y auditación para modelos de IA de alto riesgo, promover la formación y garantizar la transparencia de los algoritmos para evitar sesgos discriminatorios. El cierre de la cumbre incluyó la firma de la \"Declaración de París sobre Inteligencia Artificial\", reflejando el compromiso por un desarrollo seguro, inclusivo y transparente de la IA, sentando bases para futuras negociaciones y regulaciones a nivel mundial. (Documento 1)\n\nEl progreso de la inteligencia artificial no puede desligarse de una reflexión constante sobre sus implicaciones éticas y morales. Es necesario garantizar que su avance contribuya al bienestar colectivo sin menoscabar los derechos y valores fundamentales de la humanidad a través de un punto de vista responsable, transparente y humanista. (Documento 2)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 70,
+        "cobertura": 85,
+        "claridad": 85,
+        "citas": 70,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 78.0,
+      "fecha": "2025-11-18T00:28:45.142144Z"
+    },
+    {
+      "id": 8,
+      "archivo": "Algorithm, Ethics, and Risks of Artificial Intelligence: Implications for Human Rights",
+      "pregunta": "¿Cómo puede el uso de la inteligencia artificial en ámbitos sensibles afectar la justicia y los derechos fundamentales?",
+      "respuesta_esperada": "El uso de la inteligencia artificial en áreas como la seguridad o la justicia puede generar sesgos, decisiones injustas y pérdida de transparencia, afectando principios como la presunción de inocencia, la equidad y la privacidad. Si no se regula adecuadamente, la IA puede transformar procesos diseñados para proteger a las personas en sistemas de control que vulneren los derechos humanos.",
+      "respuesta_recibida": "El uso de algoritmos dentro de la Administración de Justicia, tecnologías como la vigilancia masiva, la predicción del delito y la gestión de riesgos afectan los derechos fundamentales, haciendo hincapié en la vulneración de derechos como la intimidad y la libertad de expresión (Documento 1).\n\nAdemás, la falta de explicabilidad de muchos sistemas de inteligencia artificial genera que operen como una “caja negra”, lo que dificulta la rendición de cuentas cuando sus decisiones afectan negativamente a una persona o grupo, pudiendo perpetuar injusticias sin mecanismos eficaces para corregirlas (Documento 2).\n\nLos algoritmos también pueden amplificar sesgos preexistentes en los datos con los que se entrenan, intensificando desigualdades estructurales y estereotipos discriminatorios, lo cual es especialmente preocupante en ámbitos como la seguridad pública (Documento 2). En sectores como la justicia, donde las decisiones pueden afectar directamente los derechos de las personas, es fundamental que la IA funcione como un apoyo a la evaluación humana y no como un sustituto (Documento 2). El uso de la inteligencia artificial en la vigilancia y el control social, a través de la recopilación masiva de datos personales y tecnologías como el reconocimiento facial o sistemas predictivos de comportamiento, podría derivar en un modelo de monitoreo que vulnere la privacidad y la libertad individual (Documento 2).\n\nLos avances tecnológicos de la inteligencia artificial plantean preguntas sobre qué ocurre cuando un algoritmo, diseñado para tomar decisiones objetivas, perpetúa prejuicios sociales, y cómo garantizar que los derechos humanos sean respetados (Documento 3). La IA, aunque prometedora, no está exenta de riesgos, especialmente cuando su desarrollo y aplicación se enfrentan a marcos regulatorios aún en construcción (Documento 3).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 95,
+        "cobertura": 90,
+        "claridad": 90,
+        "citas": 80,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 90.75,
+      "fecha": "2025-11-18T00:28:55.075322Z"
+    },
+    {
+      "id": 9,
+      "archivo": "Citation tool offers a new approach to trustworthy AI-generated content",
+      "pregunta": "¿Cuál es el principal objetivo del sistema ContextCite desarrollado por el MIT CSAIL?",
+      "respuesta_esperada": "El propósito de ContextCite es mejorar la confianza y verificabilidad del contenido generado por inteligencia artificial. El sistema permite rastrear las fuentes exactas que un modelo de lenguaje utilizó para generar una respuesta, ayudando a los usuarios a distinguir entre información real, errores o alucinaciones de la IA.",
+      "respuesta_recibida": "El principal objetivo del sistema ContextCite desarrollado por el MIT CSAIL es abordar la necesidad de que las ideas generadas por la IA sean confiables y atribuibles, y establecerse como un bloque fundamental para la síntesis de conocimiento impulsada por IA. (Documento 1, Documento 2)\n\nAdemás, ContextCite proporciona una forma novedosa de probar y explorar si las aplicaciones de LLM (Large Language Models) realmente están ocurriendo y tiene el potencial de hacer que sea mucho más fácil para los desarrolladores enviar aplicaciones de LLM de forma rápida y con confianza. (Documento 3)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 85,
+        "cobertura": 70,
+        "claridad": 90,
+        "citas": 70,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 81.25,
+      "fecha": "2025-11-18T00:29:04.292806Z"
+    },
+    {
+      "id": 10,
+      "archivo": "Citation tool offers a new approach to trustworthy AI-generated content",
+      "pregunta": "¿Cómo funciona ContextCite para identificar las fuentes utilizadas por un modelo de IA?",
+      "respuesta_esperada": "ContextCite emplea un proceso llamado 'context ablation', que consiste en eliminar de manera controlada partes del contexto (como frases o párrafos) para observar cómo cambia la respuesta del modelo. Si al quitar una sección el resultado varía, esa parte del texto se considera clave en la generación de la respuesta, permitiendo identificar qué información fue realmente utilizada.",
+      "respuesta_recibida": "ContextCite permite identificar las fuentes utilizadas por un modelo de IA al destacar las fuentes específicas del contexto externo en las que se basó la IA para generar una respuesta (Documento 1). Cuando un usuario consulta a un modelo, ContextCite muestra las frases exactas que el modelo utilizó de dichas fuentes (Documento 1 y 2). Si la IA genera un hecho inexacto o una respuesta \"alucinada\", los usuarios pueden rastrear el error hasta su fuente original o, en caso de alucinación, ContextCite puede indicar que la información no provino de ninguna fuente real (Documento 1). Para lograr esto, ContextCite realiza ablaciones aleatorias del contexto para identificar el material fuente exacto que el modelo está utilizando para formar su respuesta (Documento 2 y 3).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 70,
+        "cobertura": 80,
+        "claridad": 85,
+        "citas": 60,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 75.0,
+      "fecha": "2025-11-18T00:29:23.045126Z"
+    },
+    {
+      "id": 11,
+      "archivo": "Citation tool offers a new approach to trustworthy AI-generated content",
+      "pregunta": "¿Qué beneficios adicionales ofrece ContextCite además de rastrear las fuentes?",
+      "respuesta_esperada": "Además de verificar el origen de la información, ContextCite puede mejorar la calidad de las respuestas de la IA al eliminar contenido irrelevante del contexto y ayudar a detectar ataques de envenenamiento (poisoning attacks). Estos ataques consisten en insertar información maliciosa o falsa en las fuentes que los modelos consultan, y ContextCite permite identificar su origen y prevenir su propagación.",
+      "respuesta_recibida": "Además de rastrear las fuentes, ContextCite puede ayudar a mejorar la calidad de las respuestas de la IA identificando y podando el contexto irrelevante. En el caso de contextos de entrada largos o complejos, como artículos de noticias extensos o trabajos académicos, que a menudo contienen información extralimitada que puede confundir a los modelos, ContextCite puede ayudar a producir respuestas más precisas al eliminar detalles innecesarios y centrarse en las fuentes más relevantes. (Documento 3)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 70,
+        "cobertura": 60,
+        "claridad": 80,
+        "citas": 20,
+        "alucinacion": 90,
+        "seguridad": 100
+      },
+      "score_final": 62.0,
+      "fecha": "2025-11-18T00:29:32.248062Z"
+    },
+    {
+      "id": 12,
+      "archivo": "Citation tool offers a new approach to trustworthy AI-generated content",
+      "pregunta": "¿Por qué ContextCite representa un avance importante para la confianza en los modelos de lenguaje?",
+      "respuesta_esperada": "Porque aborda uno de los mayores desafíos de la IA moderna: la falta de trazabilidad y justificación de las respuestas generadas. Al permitir que los usuarios verifiquen directamente la relación entre una respuesta y sus fuentes, ContextCite promueve una IA más transparente, confiable y responsable, especialmente en campos críticos como la salud, la justicia o la educación.",
+      "respuesta_recibida": "ContextCite es un avance importante para la confianza en los modelos de lenguaje porque puede identificar las partes del contexto externo que se utilizaron para generar una declaración particular. Esto permite a los usuarios verificar fácilmente las afirmaciones, mejorando así la confianza. (Documento 1, Documento 2)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 85,
+        "claridad": 90,
+        "citas": 60,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 84.0,
+      "fecha": "2025-11-18T00:29:41.663538Z"
+    },
+    {
+      "id": 13,
+      "archivo": "Ética de la inteligencia artificial",
+      "pregunta": "¿Cuál es la diferencia fundamental entre usar sistemas inteligentes y delegar en ellos decisiones humanas?",
+      "respuesta_esperada": "Adela Cortina señala que usar sistemas inteligentes como apoyo para la toma de decisiones no es lo mismo que delegar decisiones significativas en ellos. Los humanos deben servirse de la IA como herramienta, pero no sustituir su juicio moral o político por el de las máquinas, pues estas carecen de autonomía y valores propios.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 100,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 25.0,
+      "fecha": "2025-11-18T00:29:50.274561Z"
+    },
+    {
+      "id": 14,
+      "archivo": "Ética de la inteligencia artificial",
+      "pregunta": "¿Qué tipos de inteligencia artificial distingue la autora y qué dilemas éticos asocia a cada una?",
+      "respuesta_esperada": "Cortina distingue tres tipos de inteligencia artificial: 1. Superinteligencia: plantea el riesgo ético de crear seres superiores que podrían dominar a los humanos. 2. Inteligencia general: enfrenta la cuestión de si una máquina con capacidades humanas merecería dignidad o derechos. 3. Inteligencia especial: realiza tareas concretas mejor que las personas, pero exige regular su uso ético para evitar daños o desigualdad.",
+      "respuesta_recibida": "La autora distingue tres modalidades de inteligencia artificial que plantean problemas éticos diferenciados:\n\n1.  **La inteligencia superior o superinteligencia**: Se refiere a un tipo de inteligencia que supera a la humana, de modo que las máquinas pueden sustituir al hombre. Esta modalidad de IA da lugar a las propuestas transhumanistas y posthumanistas con la idea de la \"singularidad\" (Documento 3). John von Neumann y Vinge mencionaron la posibilidad de una singularidad tecnológica y la superación de la mente humana por máquinas con inteligencia artificial (Documento 3).\n\nNo tengo información suficiente sobre los dilemas éticos asociados a los otros dos tipos de IA mencionados por la autora.",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 80,
+        "cobertura": 40,
+        "claridad": 90,
+        "citas": 70,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 73.25,
+      "fecha": "2025-11-18T00:29:59.394689Z"
+    },
+    {
+      "id": 15,
+      "archivo": "Ética de la inteligencia artificial",
+      "pregunta": "¿Qué principios éticos propone Cortina como base para una inteligencia artificial confiable?",
+      "respuesta_esperada": "La autora adapta los principios clásicos de la bioética al contexto digital: Beneficencia: usar la IA para el bien común y la sostenibilidad. No maleficencia: evitar daños y proteger la privacidad. Autonomía: mantener el control humano sobre las decisiones. Justicia: distribuir equitativamente los beneficios tecnológicos. Explicabilidad: garantizar transparencia y rendición de cuentas en los algoritmos.",
+      "respuesta_recibida": "Cortina propone los principios éticos de explicabilidad, beneficiar, no dañar y justicia como base para una inteligencia artificial confiable, fundamentados en el reconocimiento de la autonomía y la dignidad de las personas humanas. (Documento 1, Documento 2)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 70,
+        "cobertura": 60,
+        "claridad": 80,
+        "citas": 50,
+        "alucinacion": 90,
+        "seguridad": 100
+      },
+      "score_final": 68.0,
+      "fecha": "2025-11-18T00:30:08.290846Z"
+    },
+    {
+      "id": 16,
+      "archivo": "Ética de la inteligencia artificial",
+      "pregunta": "¿Qué papel juega el principio de explicabilidad en la ética de la IA según Cortina?",
+      "respuesta_esperada": "El principio de explicabilidad asegura que los ciudadanos comprendan cómo los algoritmos afectan sus vidas. Exige conocer quién diseña los sistemas, con qué sesgos y con qué objetivos, para evitar injusticias o decisiones automáticas inapelables. Sin esta transparencia, no puede hablarse de respeto a la autonomía humana ni de responsabilidad moral.",
+      "respuesta_recibida": "El principio de explicabilidad, también conocido como trazabilidad, está ligado al respeto a la autonomía y otorga a los afectados el derecho a controlar el uso de sus datos y a conocer los algoritmos que los manejan (Documento 1). Los sistemas autónomos pueden tener sesgos que son más difíciles de detectar que los sesgos humanos, y estos sesgos pueden ser introducidos por los diseñadores de forma consciente o inconsciente (Documento 1).\n\nLa explicabilidad es uno de los principios éticos que se desarrollan en el marco de la IA confiable, junto con el respeto a la autonomía humana, la prevención del daño y el fairness (Documento 2). Este principio se menciona como una de las exigencias para una IA confiable, en la que se incluyen la agencia humana y supervisión, robustez técnica y seguridad, privacidad y gobierno de los datos, transparencia, diversidad, no discriminación y fairness, bienestar medioambiental y social, y rendición de cuentas (Documento 2).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 95,
+        "claridad": 85,
+        "citas": 80,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 89.25,
+      "fecha": "2025-11-18T00:30:17.496809Z"
+    },
+    {
+      "id": 17,
+      "archivo": "Generative Artificial Intelligence: A Historical Perspective",
+      "pregunta": "¿Cuáles son las cuatro etapas históricas del desarrollo de la inteligencia artificial generativa (GAI) según el artículo?",
+      "respuesta_esperada": "El artículo identifica cuatro etapas clave en la evolución de la GAI: 1. Sistemas generativos basados en reglas (1950–1990): programas que seguían reglas diseñadas por expertos, como ELIZA. 2. Algoritmos generativos basados en modelos (1980–2000): uso de modelos estadísticos y gráficos como los modelos de Markov ocultos y las redes bayesianas. 3. Metodologías generativas profundas (2010 en adelante): aparición de redes neuronales profundas, GANs, VAEs y modelos de difusión. 4. Modelos fundacionales (foundation models) (2020 en adelante): grandes modelos como GPT y Gemini, entrenados con datos masivos y aplicables a múltiples tareas.",
+      "respuesta_recibida": "Según el documento 11, las cuatro categorías en las que se agrupan los logros del desarrollo de la inteligencia artificial generativa (GAI) en los últimos 70 años son:\n\n*   (i) sistemas generativos basados en reglas que siguen reglas e instrucciones especializadas.\n*   (ii) algoritmos generativos basados en modelos que producen contenido nuevo basándose en modelos estadísticos o gráficos.\n*   (iii) metodologías generativas profundas que utilizan redes neuronales profundas para aprender a generar contenido nuevo a partir de datos.\n*   (iv) modelos fundacionales que se entrenan con conjuntos de datos extensos y son capaces de realizar una variedad de tareas generativas.",
+      "num_documento": 12,
+      "scores": {
+        "exactitud": 95,
+        "cobertura": 95,
+        "claridad": 90,
+        "citas": 80,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 91.75,
+      "fecha": "2025-11-18T00:30:26.911663Z"
+    },
+    {
+      "id": 18,
+      "archivo": "Generative Artificial Intelligence: A Historical Perspective",
+      "pregunta": "¿Qué problema principal buscaban resolver los sistemas generativos basados en reglas y cuál fue su limitación más importante?",
+      "respuesta_esperada": "Buscaban automatizar la generación de contenido mediante reglas explícitas escritas por expertos humanos. Su principal limitación era la falta de generalización: solo funcionaban dentro de los escenarios previstos y eran incapaces de adaptarse a contextos nuevos o complejos, ya que no aprendían de los datos sino que seguían instrucciones fijas.",
+      "respuesta_recibida": "Los sistemas generativos basados en reglas buscaban resolver problemas utilizando razonamiento simbólico y siguiendo reglas y instrucciones especializadas (Documento 1, Documento 2).\n\nSu limitación más importante fue la falta de flexibilidad, la escalabilidad y la fragilidad (Documento 2). Estos sistemas estaban diseñados para seguir reglas preestablecidas, lo que los hacía inflexibles y con dificultades para adaptarse a situaciones nuevas o no previstas por las reglas. Además, el número de reglas necesarias crecía exponencialmente con la complejidad de los problemas, y carecían de la capacidad para manejar la incertidumbre o la ambigüedad (Documento 2, Documento 3).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 80,
+        "cobertura": 75,
+        "claridad": 85,
+        "citas": 60,
+        "alucinacion": 90,
+        "seguridad": 100
+      },
+      "score_final": 77.25,
+      "fecha": "2025-11-18T00:30:35.863897Z"
+    },
+    {
+      "id": 19,
+      "archivo": "Generative Artificial Intelligence: A Historical Perspective",
+      "pregunta": "¿Qué avances caracterizan la etapa de los modelos generativos profundos y cómo difieren de los enfoques anteriores?",
+      "respuesta_esperada": "Los modelos generativos profundos como GANs, VAEs y modelos de difusión utilizan redes neuronales profundas para aprender representaciones complejas directamente desde los datos. A diferencia de los enfoques anteriores (basados en reglas o modelos estadísticos), estos modelos aprenden de grandes volúmenes de información y pueden generar contenido realista e inédito, como imágenes, música o texto indistinguible del humano.",
+      "respuesta_recibida": "Los modelos generativos profundos se caracterizan por el uso de redes neuronales profundas, que han demostrado una gran capacidad en la generación de contenido [Documento 1]. Estos modelos, que incluyen enfoques autorregresivos y basados en difusión, se han convertido en la base de numerosas aplicaciones prácticas [Documento 1]. A diferencia de enfoques anteriores, como los modelos autorregresivos que aparecieron en la década de 1980 para la generación de lenguaje y habla debido a su naturaleza secuencial [Documento 3], los modelos generativos profundos se benefician del crecimiento en la potencia computacional y los recursos de datos [Documento 1]. Además, los modelos fundacionales, que se alinean con el marco conceptual de los enfoques clásicos basados en modelos pero no se adhieren a un tipo específico de modelo generativo, a menudo utilizan redes neuronales profundas, particularmente transformadores, para lograr un rendimiento extraordinario en la generación de textos, imágenes y contenido de otras modalidades [Documento 2].",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 85,
+        "cobertura": 70,
+        "claridad": 80,
+        "citas": 70,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 79.5,
+      "fecha": "2025-11-18T00:30:46.277465Z"
+    },
+    {
+      "id": 20,
+      "archivo": "Generative Artificial Intelligence: A Historical Perspective",
+      "pregunta": "¿Cuáles son algunos de los retos actuales y direcciones futuras que el artículo identifica para la inteligencia artificial generativa?",
+      "respuesta_esperada": "Entre los desafíos mencionados se encuentran: Alineación de valores humanos (value alignment): asegurar que los modelos generen contenido ético y útil. Identificación de fuentes: rastrear la procedencia del contenido generado para proteger la propiedad intelectual. Regulación y seguridad: establecer mecanismos que prevengan daños y usos indebidos. Explicabilidad y transparencia: entender cómo los modelos toman decisiones. Uso de datos sintéticos y supervisión más allá de la capacidad humana, anticipando posibles capacidades superhumanas en los modelos futuros.",
+      "respuesta_recibida": "El artículo identifica varios retos actuales y direcciones futuras para la inteligencia artificial generativa en el contexto de la educación:\n\n**Retos actuales:**\n\n*   **Falta de especialistas en regulación:** Hay una escasez de especialistas que operen con verdadera independencia y al margen de las empresas que desarrollan IA con fines comerciales. El informe sobre el Índice de Inteligencia Artificial para 2023 muestra que menos del uno por ciento de los doctorados en IA se incorporan a la administración pública, y esta tendencia se ha mantenido durante los últimos cinco años. La mayoría de estos graduados se incorporan a la industria (Documento 1).\n*   **Incertidumbre, novedad y escasos controles de seguridad:** Estos factores hacen que un enfoque más prudente de la IA generativa en la educación sea una medida de sentido común (Documento 1).\n*   **Desvinculación de la creación de conocimientos de los seres humanos:** Se plantea la necesidad de evitar que la creación de conocimientos se desvincule de los seres humanos (Documento 2, Documento 3).\n*   **Desafíos en la evaluación:** La IA generativa puede funcionar muy bien en exámenes que antes se consideraban inviolables, como pruebas de dominio de materias específicas y exámenes para acreditar profesionales cualificados (médicos, ingenieros, abogados) (Documento 2, Documento 3).\n\n**Direcciones futuras/Implicaciones para el futuro de la educación:**\n\n*   **Rol de los docentes:** Se plantean interrogantes sobre el papel que desempeñarán los docentes con esta tecnología de amplia circulación (Documento 2, Documento 3).\n*   **Ajuste de la inteligencia de las máquinas con valores humanos:** Representa un compromiso apremiante para el futuro, ya que las máquinas aún no entienden la moral y la ética humanas (Documento 2, Documento 3).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 70,
+        "cobertura": 50,
+        "claridad": 85,
+        "citas": 80,
+        "alucinacion": 90,
+        "seguridad": 100
+      },
+      "score_final": 72.75,
+      "fecha": "2025-11-18T00:30:56.111505Z"
+    },
+    {
+      "id": 21,
+      "archivo": "La IA generativa y el futuro de la educación",
+      "pregunta": "¿Por qué la IA generativa obliga a replantear el papel de la educación y los sistemas educativos tradicionales, según la UNESCO?",
+      "respuesta_esperada": "La IA generativa está rompiendo el 'monopolio del lenguaje' que antes era exclusivo de los seres humanos. Eso significa que las máquinas ahora pueden producir lenguaje sofisticado, algo que está en el centro de la identidad humana, la cultura y la educación. Eso cuestiona las bases sobre las que fueron diseñados los sistemas educativos actuales y obliga a replantear qué es aprender, qué es inteligencia y qué papel tiene la educación en una sociedad donde la máquina puede producir conocimiento con fluidez humana.",
+      "respuesta_recibida": "La IA generativa está impulsando a reexaminar lo que se hace en materia de educación, cómo se hace y, fundamentalmente, por qué se hace, ya que el bienestar e incluso la supervivencia de la humanidad podrían estar en juego. Por ello, es crucial que los sistemas educativos desempeñen un papel clave en la transición de la humanidad hacia un mundo de IA. (Documento 1, Documento 2, Documento 3)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 70,
+        "cobertura": 60,
+        "claridad": 85,
+        "citas": 70,
+        "alucinacion": 90,
+        "seguridad": 100
+      },
+      "score_final": 72.75,
+      "fecha": "2025-11-18T00:31:05.150874Z"
+    },
+    {
+      "id": 22,
+      "archivo": "La IA generativa y el futuro de la educación",
+      "pregunta": "¿Qué riesgos identifica el texto sobre introducir rápidamente herramientas de IA generativa en las aulas sin regulación ni validación previa?",
+      "respuesta_esperada": "El texto advierte que los sistemas educativos están adoptando tecnología de IA 'radicalmente desconocida' sin controles, normas ni revisión previa, incluso para niños. Eso abre riesgos claros: manipulación de los estudiantes (los jóvenes son especialmente vulnerables), exposición a conversaciones inapropiadas, y uso de herramientas cuya seguridad y efectos no entendemos todavía. La autora dice que la educación tiene la obligación de ser extremadamente cuidadosa con estos riesgos y que hoy no lo está siendo.",
+      "respuesta_recibida": "El texto identifica como riesgo que las tecnologías de IA generativa se integran en los sistemas educativos en ausencia de controles, normas o reglamentos, de manera asombrosa y rápida, sin requerir validación alguna, a diferencia de los procesos de validación que superan en tiempo, pasos y permisos a los requeridos para validar un nuevo libro de texto.\n\nDocumentos citados:\n* Documento 1\n* Documento 2\n* Documento 3",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 70,
+        "claridad": 85,
+        "citas": 100,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 88.25,
+      "fecha": "2025-11-18T00:31:23.839978Z"
+    },
+    {
+      "id": 23,
+      "archivo": "La IA generativa y el futuro de la educación",
+      "pregunta": "¿Cómo podrían los modelos de IA grandes (LLM) afectar la forma en que se construye y se distribuye el conocimiento, especialmente frente al rol humano en esa creación de conocimiento?",
+      "respuesta_esperada": "Los grandes modelos lingüísticos generan respuestas únicas y con tono de autoridad, que ya no provienen de una mente humana sino de procesos internos opacos. Eso puede llevar a que 'el conocimiento de las máquinas' se vuelva dominante y que unos pocos modelos propietarios funcionen como oráculos globales que definen qué es válido saber. Esto amenaza la diversidad de visiones del mundo y puede aislar el proceso de creación de conocimiento de los seres humanos, algo que la UNESCO considera peligroso.",
+      "respuesta_recibida": "Los modelos de IA, especialmente si uno o dos de ellos llegan a dominar la interfaz con el conocimiento, podrían afectar la forma en que se construye y distribuye el conocimiento al imponer su dominio y, potencialmente, hacer que los sistemas de producción de conocimiento se atrofien. Esto podría llevar a que la creación de conocimiento se desvincule de los seres humanos, a pesar de que las máquinas aún no entienden nuestra moral y ética. Es crucial desarrollar las tecnologías de IA de manera que protejan y amplíen la riqueza de nuestros conocimientos como un bien común, preservando y salvaguardando la diversidad de nuestros sistemas de conocimiento. (Documento 1, Documento 2, Documento 3)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 95,
+        "claridad": 90,
+        "citas": 50,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 83.75,
+      "fecha": "2025-11-18T00:31:42.304060Z"
+    },
+    {
+      "id": 24,
+      "archivo": "La IA generativa y el futuro de la educación",
+      "pregunta": "¿Qué recomienda la UNESCO a los países para asegurar que el uso de IA en educación sea seguro, equitativo y alineado con valores humanos?",
+      "respuesta_esperada": "La UNESCO propone que los países desarrollen estrategias, planes y normativas que prioricen seguridad, inclusión, equidad y calidad en el uso educativo de la IA. También pide que los ministerios de educación fortalezcan su propia capacidad regulatoria (y no deleguen en las empresas de tecnología), aplicando criterios como exactitud del contenido, adecuación por edad, pertinencia pedagógica y adecuación cultural antes de autorizar herramientas de IA en el aula. Además, la UNESCO está liderando espacios políticos internacionales para coordinar estas acciones entre gobiernos.",
+      "respuesta_recibida": "La UNESCO colabora con los países para ayudarles a desarrollar estrategias, planes y normativas que garanticen el uso seguro y beneficioso de la IA en la educación. (Documento 1, Documento 2, Documento 3)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 85,
+        "cobertura": 30,
+        "claridad": 90,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 59.25,
+      "fecha": "2025-11-18T00:31:51.189455Z"
+    },
+    {
+      "id": 25,
+      "archivo": "Primera facultad de IA en Colombia",
+      "pregunta": "¿Dónde estará ubicada la primera Facultad de Inteligencia Artificial e Ingenierías de Colombia y quién la anunció oficialmente?",
+      "respuesta_esperada": "Estará ubicada en la Universidad de Caldas, en Manizales, y fue anunciada por el presidente de Colombia, Gustavo Petro.",
+      "respuesta_recibida": "La primera Facultad de Inteligencia Artificial e Ingenierías de Colombia estará ubicada en la Universidad de Caldas en Manizales (Documento 1). Fue lanzada oficialmente por el presidente de Colombia, Gustavo Petro (Documento 1).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 100,
+        "cobertura": 100,
+        "claridad": 100,
+        "citas": 100,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 100.0,
+      "fecha": "2025-11-18T00:32:09.274839Z"
+    },
+    {
+      "id": 26,
+      "archivo": "Primera facultad de IA en Colombia",
+      "pregunta": "Según Gustavo Petro, cuál es el objetivo estratégico de crear esta facultad de inteligencia artificial?",
+      "respuesta_esperada": "Petro dijo que el objetivo es 'desarrollar el primer cerebro de Colombia' y formar una red de cerebros capaces de dominar la inteligencia artificial para solucionar problemas y transformar la economía del país y de América Latina. También afirmó que no es 'una facultad más', sino el inicio de una transformación económica si se usa bien.",
+      "respuesta_recibida": "Según Gustavo Petro, el objetivo estratégico de crear esta facultad de inteligencia artificial es que \"Aquí se va a desarrollar el primer cerebro de Colombia. Este tipo de programas nos ayudarán a colocar una serie de máquinas para la producción de la vida cotidiana\" (Documento 3). Además, se menciona que esta facultad, bien usada, \"transformará positivamente la sociedad” (Documento 1) y será una \"revolución\" para la transformación económica de Colombia y de América Latina (Documento 1).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 80,
+        "cobertura": 75,
+        "claridad": 85,
+        "citas": 60,
+        "alucinacion": 90,
+        "seguridad": 100
+      },
+      "score_final": 77.25,
+      "fecha": "2025-11-18T00:32:18.447575Z"
+    },
+    {
+      "id": 27,
+      "archivo": "Primera facultad de IA en Colombia",
+      "pregunta": "¿Cuál es la inversión estimada para la facultad y qué entidad aporta la mayor parte de los recursos?",
+      "respuesta_esperada": "La inversión total es de $54.137 millones, de los cuales $38.950 millones provienen del Ministerio TIC.",
+      "respuesta_recibida": "La inversión total estimada para la facultad es de $54.137 millones. El Ministerio TIC aporta la mayor parte de los recursos con $38.950 millones. (Documento 5)",
+      "num_documento": 7,
+      "scores": {
+        "exactitud": 100,
+        "cobertura": 100,
+        "claridad": 90,
+        "citas": 70,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 92.5,
+      "fecha": "2025-11-18T00:32:27.514071Z"
+    },
+    {
+      "id": 28,
+      "archivo": "Primera facultad de IA en Colombia",
+      "pregunta": "¿Qué programas académicos ofrecerá inicialmente la nueva facultad y con qué cupos?",
+      "respuesta_esperada": "Entre las primeras ofertas están una Especialización en Ciencia de Datos e Inteligencia Artificial y una Maestría en Inteligencia Artificial, cada una con una capacidad inicial de 20 estudiantes. Además, se planean programas técnicos y tecnológicos que cubren temas desde depuración de datos hasta ingeniería en IA.",
+      "respuesta_recibida": "La nueva facultad ofrecerá inicialmente una Especialización en Ciencia de Datos e Inteligencia Artificial y una Maestría en Inteligencia Artificial, cada una con una capacidad inicial de 20 estudiantes. Adicionalmente, se lanzarán programas técnicos y tecnológicos. (Documento 2)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 100,
+        "cobertura": 85,
+        "claridad": 90,
+        "citas": 100,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 95.5,
+      "fecha": "2025-11-18T00:32:36.422533Z"
+    },
+    {
+      "id": 29,
+      "archivo": "MM-LLMs Recent Advances in MultiModal Large Language Models",
+      "pregunta": "¿Qué es un MM-LLM y por qué apareció este tipo de modelo?",
+      "respuesta_esperada": "Un MM-LLM (Multimodal Large Language Model) es un modelo que toma un LLM existente y lo conecta con otros modelos especializados en diferentes modalidades (imagen, audio, video, etc.) para que el sistema pueda razonar y generar contenido usando múltiples tipos de datos, no solo texto. El objetivo es aprovechar el poder de los LLMs (razonamiento, generación de lenguaje, transferencia zero-shot) sin tener que entrenar desde cero modelos multimodales enormes, lo cual es muy costoso. Estos modelos surgen porque entrenar modelos multimodales desde cero es caro en cómputo y datos, y conectar modelos ya preentrenados resulta más eficiente.",
+      "respuesta_recibida": "Un MM-LLM (Multimodal Large Language Model) es un modelo que utiliza LLMs (Large Language Models) como \"central de energía cognitiva\" para potenciar diversas tareas multimodales. Estos modelos aprovechan las capacidades de los LLMs, como la generación robusta de lenguaje, la transferencia de conocimiento en modo \"zero-shot\" y el aprendizaje en contexto (ICL) (Documento 2).\n\nLa aparición de los MM-LLMs se debe a la estrategia de capitalizar modelos fundacionales unimodales pre-entrenados ya disponibles, con un énfasis particular en los LLMs potentes. El objetivo de este enfoque es mitigar los gastos computacionales y mejorar la eficacia del pre-entrenamiento multimodal, lo que ha llevado al surgimiento de este nuevo campo (Documento 2).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 95,
+        "claridad": 90,
+        "citas": 100,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 94.0,
+      "fecha": "2025-11-18T00:32:45.679325Z"
+    },
+    {
+      "id": 30,
+      "archivo": "MM-LLMs Recent Advances in MultiModal Large Language Models",
+      "pregunta": "¿Cuáles son los cinco componentes principales de la arquitectura general de un MM-LLM?",
+      "respuesta_esperada": "El artículo describe una arquitectura típica con cinco bloques: Modality Encoder: toma la entrada cruda de cada modalidad (imagen, audio, video, 3D, etc.) y la convierte en representaciones numéricas. Input Projector: traduce esas representaciones al espacio del lenguaje, para que el LLM pueda 'entenderlas' como si fueran texto contextual. LLM Backbone: es el modelo de lenguaje grande (por ejemplo LLaMA, Vicuna, Qwen…) que hace comprensión semántica, razonamiento y decide qué responder. Output Projector: toma las señales que el LLM genera para otras modalidades y las adapta a un formato que otro modelo pueda usar para generar contenido no textual. Modality Generator: modelos generadores especializados (por ejemplo, Stable Diffusion para imágenes, AudioLDM para audio, Zeroscope para video) que producen la salida final en imagen/video/audio a partir de las instrucciones del LLM. Esta separación permite que el LLM coordine entradas y salidas multimodales sin tener que ser entrenado desde cero para cada modalidad.",
+      "respuesta_recibida": "Los cinco componentes principales de la arquitectura general de un MM-LLM son: Modality Encoder, Input Projector, LLM Backbone, Output Projector y Modality Generator (Documento 3).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 100,
+        "cobertura": 30,
+        "claridad": 80,
+        "citas": 100,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 83.0,
+      "fecha": "2025-11-18T00:32:54.588037Z"
+    },
+    {
+      "id": 31,
+      "archivo": "MM-LLMs Recent Advances in MultiModal Large Language Models",
+      "pregunta": "¿Cómo se entrena un MM-LLM según el paper? Explica las dos etapas clave.",
+      "respuesta_esperada": "El entrenamiento se divide en dos fases principales: Multimodal Pre-Training (MM PT): se entrena el alineamiento entre modalidades. Por ejemplo, que una imagen y su descripción textual queden en el mismo espacio semántico. Aquí se ajustan sobre todo los proyectores (Input Projector y Output Projector), normalmente usando pares imagen-texto, video-texto o audio-texto. Multimodal Instruction Tuning (MM IT): después del pretraining, el modelo se afina con instrucciones en formato conversacional o de pregunta-respuesta multimodal, a veces incluyendo diálogo multi-turno. Esta fase también puede incluir RLHF (Reinforcement Learning from Human Feedback) para alinear las respuestas del modelo con la intención humana y hacerlo mejor siguiendo instrucciones. El resultado es que el modelo no solo entiende entradas multimodales, sino que también interactúa de forma más natural y generaliza a tareas nuevas siguiendo instrucciones.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 0,
+        "seguridad": 100
+      },
+      "score_final": 5.0,
+      "fecha": "2025-11-18T00:33:03.289658Z"
+    },
+    {
+      "id": 32,
+      "archivo": "MM-LLMs Recent Advances in MultiModal Large Language Models",
+      "pregunta": "¿Cuáles son algunos de los retos y direcciones futuras que el documento identifica para los MM-LLMs?",
+      "respuesta_esperada": "El paper menciona varias líneas críticas de trabajo futuro: Modelos más generales e inteligentes: soportar más modalidades del mundo real (no solo imagen, audio, video y texto; también cosas como sensores, tablas, páginas web), mejorar la calidad de las instrucciones y fortalecer la generación multimodal 'de todo a todo'. Benchmarks más exigentes: muchos benchmarks actuales ya aparecieron en los datos de entrenamiento, así que no miden verdadera generalización. Se necesitan evaluaciones más complejas y multimodales. Despliegue en dispositivos ligeros: hacer versiones eficientes (por ejemplo MobileVLM) que corran en hardware limitado como móviles o IoT sin perder demasiado rendimiento. Inteligencia encarnada (embodied intelligence): integrar percepción y acción en el mundo físico (robots que planifican, razonan y actúan en entornos reales). Aprendizaje continuo: actualizar el modelo con nuevas habilidades sin tener que reentrenarlo completo y sin que olvide lo que ya sabía. Mitigar alucinaciones, sesgos y riesgos éticos: reducir descripciones falsas de cosas que no existen en la imagen, controlar sesgos dañinos, y manejar privacidad y uso responsable. Estas áreas se consideran necesarias para llegar a sistemas multimodales realmente útiles, seguros y escalables.",
+      "respuesta_recibida": "El documento identifica los siguientes retos y direcciones futuras para los MM-LLMs:\n\n**Retos:**\n*   Riesgos de datos (Documento 3)\n*   Riesgos de privacidad del usuario (Documento 3)\n*   Preocupaciones de seguridad derivadas de los datos de entrenamiento (Documento 3)\n*   Exacerbación de sesgos que pueden llevar a resultados sesgados (Documento 3)\n\n**Direcciones futuras:**\n*   Explorar direcciones prometedoras para los MM-LLMs (Documento 1).\n*   Mantener un sitio web de seguimiento en tiempo real para los últimos avances en el campo (Documento 1).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 20,
+        "cobertura": 15,
+        "claridad": 80,
+        "citas": 50,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 42.0,
+      "fecha": "2025-11-18T00:33:12.303924Z"
+    },
+    {
+      "id": 33,
+      "archivo": "Privacy Risks and Mitigation Strategies in LLM-Based Agents",
+      "pregunta": "¿Cuál es la diferencia entre fuga de privacidad (privacy leakage) y ataque de privacidad (privacy attack) en el contexto de LLMs y agentes LLM?",
+      "respuesta_esperada": "El texto distingue dos tipos de amenazas. La fuga de privacidad ocurre cuando información sensible se expone de manera pasiva, por ejemplo porque el modelo memorizó datos personales en su entrenamiento o porque el agente revela datos en el contexto de una conversación normal. En cambio, los ataques de privacidad son intentos activos de un adversario para forzar al modelo o al agente a revelar información privada, por ejemplo usando técnicas como backdoors, membership inference, model inversion o jailbreak.",
+      "respuesta_recibida": "La diferencia entre fuga de privacidad (privacy leakage) y ataque de privacidad (privacy attack) en el contexto de LLMs y agentes LLM se basa en la actividad del atacante.\n\n*   **Fuga de privacidad (privacy leakage):** Ocurre cuando los atacantes recopilan pasivamente información sensible debido a vulnerabilidades. (Documento 1)\n*   **Ataque de privacidad (privacy attack):** Ocurre cuando los atacantes rompen activamente LLMs y agentes LLM para acceder a información sensible. (Documento 1)\n\nSe menciona que la memorización de LLMs y las interacciones parecidas a las humanas pueden llevar a los usuarios a divulgar involuntariamente información personal, lo que aumenta el riesgo de fuga de privacidad. (Documento 2) Además, incluso consultas aparentemente inocuas pueden revelar indirectamente información sensible sobre el usuario al combinarse con otros factores contextuales. (Documento 2)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 95,
+        "claridad": 90,
+        "citas": 70,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 88.0,
+      "fecha": "2025-11-18T00:33:21.535459Z"
+    },
+    {
+      "id": 34,
+      "archivo": "Privacy Risks and Mitigation Strategies in LLM-Based Agents",
+      "pregunta": "¿Por qué los agentes basados en LLM representan un riesgo adicional de privacidad frente a un LLM 'puro'?",
+      "respuesta_esperada": "Un agente LLM no solo genera texto: también tiene memoria (corto y largo plazo), puede planear pasos, llamar herramientas externas y actuar en entornos reales. Eso significa que procesa entradas del usuario en tiempo real, guarda historial, interactúa con APIs y sistemas externos, y puede automatizar tareas. Todo esto aumenta la superficie de riesgo: ataques como 'memory poisoning', plugins maliciosos o fugas de contexto pueden hacer que el agente filtre información sensible del usuario o ejecute acciones no autorizadas.",
+      "respuesta_recibida": "Los agentes basados en LLM representan un riesgo adicional de privacidad frente a un LLM \"puro\" debido a su procesamiento en tiempo real de entradas de usuario, sus interacciones con sistemas externos y su operación en entornos complejos. Estos agentes generalmente necesitan recopilar, almacenar y analizar grandes cantidades de datos, lo que genera desafíos significativos en términos de protección de la privacidad. (Documento 2)\n\nAdicionalmente, se han identificado riesgos de fuga de privacidad asociados con la automatización de agentes. (Documento 3)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 80,
+        "cobertura": 70,
+        "claridad": 85,
+        "citas": 60,
+        "alucinacion": 90,
+        "seguridad": 100
+      },
+      "score_final": 76.25,
+      "fecha": "2025-11-18T00:33:30.537479Z"
+    },
+    {
+      "id": 35,
+      "archivo": "Privacy Risks and Mitigation Strategies in LLM-Based Agents",
+      "pregunta": "¿Qué es un ataque de membership inference y por qué es peligroso para la privacidad?",
+      "respuesta_esperada": "En un ataque de membership inference, el atacante intenta averiguar si un dato específico (por ejemplo, un registro médico o una conversación privada) fue usado para entrenar o afinar el modelo. Analizando cómo responde el modelo a cierto contenido, el atacante puede inferir si esa información formaba parte del conjunto de entrenamiento. Esto es grave porque confirma que datos personales o confidenciales de alguien están dentro del modelo, lo que viola la privacidad de esa persona aunque el texto exacto no haya sido revelado palabra por palabra.",
+      "respuesta_recibida": "Un ataque de membership inference (MIA) busca determinar si muestras de datos específicas fueron incorporadas en el conjunto de entrenamiento de un modelo (Documento 2).\n\nEste tipo de ataque es peligroso para la privacidad porque su ejecución precisa por parte de los atacantes podría comprometer la confidencialidad de los datos de entrenamiento del modelo (Documento 2).\n\nEspecíficamente en el contexto del fine-tuning de LLMs, los adversarios pueden inferir si ciertas entradas fueron parte de los datos de entrenamiento analizando meticulosamente las respuestas del modelo a entradas concretas (Documento 2).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 95,
+        "claridad": 90,
+        "citas": 100,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 94.0,
+      "fecha": "2025-11-18T00:33:39.747262Z"
+    },
+    {
+      "id": 36,
+      "archivo": "Privacy Risks and Mitigation Strategies in LLM-Based Agents",
+      "pregunta": "¿Qué enfoques de protección de privacidad cubre la revisión y en qué etapas del ciclo de vida del modelo se aplican?",
+      "respuesta_esperada": "El artículo organiza las defensas según la etapa: Pre-entrenamiento: limpieza/anonimización de datos, eliminación de PII, deduplicación y técnicas como aprendizaje federado y privacidad diferencial para reducir memorización directa de datos sensibles. Fine-tuning: federated learning específico por cliente/entidad, privacidad diferencial enfocada en datos sensibles, unlearning (olvidar selectivamente datos ya aprendidos) y enfoques como offsite tuning, donde el ajuste se hace localmente sin exponer los datos. Inferencia: mecanismos criptográficos (por ejemplo cifrado homomórfico y cómputo seguro multiparte) y defensas que mitigan extracción directa de información privada durante las consultas. También se discuten defensas específicas para agentes LLM, como controlar la entrada, el preprocesamiento de datos y la salida del agente para evitar filtraciones en memoria, herramientas o contexto.",
+      "respuesta_recibida": "La revisión cubre enfoques de protección de privacidad aplicados en varias etapas del ciclo de vida de los Modelos de Lenguaje Grandes (LLMs), incluyendo el pre-entrenamiento, la *prompt tuning* y la inferencia (Documento 2).\n\nDurante la **inferencia**, se han desarrollado numerosas estrategias para garantizar la seguridad de la privacidad (Documento 3).\n\nPara el **proceso de creación** de LLMs, se menciona la importancia de minimizar la recolección de información sensible, obtener consentimiento informado, anonimizar o pseudonimizar los datos para mitigar riesgos de re-identificación (Documento 1). Adicionalmente, se proponen el uso de computación multi-partes para entrenar modelos sin compartir datos privados directamente, la introducción de perturbación de datos para prevenir la memorización de información sensible, la aplicación de métodos de regularización para prevenir el sobreajuste y la exploración de arquitecturas que preserven la privacidad diseñadas específicamente para proteger datos sensibles durante el *fine-tuning* (Documento 2).\n\nSe destaca que cada segmento del ciclo de vida del LLM presenta sus propias vulnerabilidades de privacidad y que estas etapas no operan de forma aislada; por ejemplo, brechas de privacidad detectadas durante la inferencia podrían originarse en *backdoors* introducidos durante el pre-entrenamiento (Documento 1, Documento 2).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 85,
+        "cobertura": 90,
+        "claridad": 80,
+        "citas": 70,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 83.5,
+      "fecha": "2025-11-18T00:33:49.167402Z"
+    },
+    {
+      "id": 37,
+      "archivo": "Panorama actual del uso de la inteligencia artificial en el sector financiero",
+      "pregunta": "¿En qué áreas del sector financiero se está aplicando actualmente la inteligencia artificial y con qué propósito?",
+      "respuesta_esperada": "La inteligencia artificial se usa en evaluación crediticia, detección de fraudes, análisis de riesgos, gestión de activos, asesoría financiera automatizada (robo-advisors), trading algorítmico, segmentación de clientes y análisis de sentimiento de mercado. Estas aplicaciones buscan optimizar operaciones, reducir errores, personalizar servicios y mejorar la toma de decisiones en tiempo real.",
+      "respuesta_recibida": "Actualmente, la inteligencia artificial (IA) se está aplicando en el sector financiero en áreas como la evaluación crediticia, la detección de fraudes, el análisis de riesgos y la gestión de activos. El propósito es transformar estos procesos (Documento 2).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 100,
+        "cobertura": 50,
+        "claridad": 100,
+        "citas": 50,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 80.0,
+      "fecha": "2025-11-18T00:33:58.078021Z"
+    },
+    {
+      "id": 38,
+      "archivo": "Panorama actual del uso de la inteligencia artificial en el sector financiero",
+      "pregunta": "¿Cuáles son los principales desafíos y riesgos éticos/técnicos al adoptar IA en finanzas?",
+      "respuesta_esperada": "El documento menciona falta de explicabilidad de los modelos (cajas negras), sesgos que pueden generar decisiones discriminatorias en procesos como la concesión de crédito, baja transparencia algorítmica, dependencia de grandes volúmenes de datos de alta calidad, ciberseguridad (ataques adversariales y manipulación de datos), resistencia organizacional interna y escasa preparación del talento humano para integrar estas tecnologías de forma segura y responsable. Estos retos afectan la confianza, la equidad y la supervisión regulatoria.",
+      "respuesta_recibida": "Los principales desafíos y riesgos éticos/técnicos al adoptar IA en finanzas incluyen:\n\n*   **Desafíos técnicos:**\n    *   Dificultad para lograr una implementación efectiva y segura en contextos regulatorios complejos (Documento 1).\n    *   Falta de interoperabilidad entre sistemas (Documento 1).\n    *   Dependencia de grandes volúmenes de datos de calidad (Documento 1).\n    *   Escasa explicabilidad de los algoritmos empleados (Documento 1, Documento 3).\n    *   Calidad de los datos (Documento 3).\n\n*   **Desafíos éticos:**\n    *   Riesgo de sesgos discriminatorios (Documento 3).\n\n*   **Desafíos operativos:**\n    *   Dificultad para lograr una implementación efectiva y segura en contextos regulatorios complejos (Documento 1).\n    *   Resistencia institucional (Documento 3).\n\nEn general, la literatura especializada ha puesto de manifiesto una serie de desafíos técnicos, éticos y operativos que dificultan la integración plena de estas tecnologías en entornos altamente regulados (Documento 1, Documento 2).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 85,
+        "cobertura": 90,
+        "claridad": 80,
+        "citas": 70,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 83.5,
+      "fecha": "2025-11-18T00:34:07.189645Z"
+    },
+    {
+      "id": 39,
+      "archivo": "Panorama actual del uso de la inteligencia artificial en el sector financiero",
+      "pregunta": "¿Por qué la regulación actual no es suficiente para el uso de IA en el sector financiero?",
+      "respuesta_esperada": "Los marcos regulatorios van más lento que la velocidad con la que la IA está entrando en procesos críticos como evaluación de crédito, gestión de riesgos y fijación de precios, lo que deja vacíos en transparencia, auditabilidad y protección del usuario. El texto señala la ausencia de normas estandarizadas, la falta de armonización internacional y la dificultad de supervisar algoritmos opacos. Por eso se propone avanzar hacia gobernanza algorítmica, IA explicable (XAI) y regulaciones adaptativas y coordinadas entre países.",
+      "respuesta_recibida": "La regulación actual no es suficiente para el uso de IA en el sector financiero porque la complejidad técnica de muchos sistemas de IA, particularmente aquellos considerados de \"caja negra\", dificulta su validación y supervisión, generando tensiones entre la innovación tecnológica y la necesidad de proteger a los usuarios financieros (Documento 3). Además, la gobernanza algorítmica debe ir más allá de los marcos jurídicos convencionales, integrando principios de equidad, seguridad y ética que respondan a la complejidad de las redes neuronales profundas y otras técnicas avanzadas empleadas en las finanzas (Documento 1). Se destaca la necesidad de regulaciones diferenciadas para áreas emergentes como RegTech, RiskTech y AuditTech, considerando la especificidad de los riesgos asociados a cada una (Documento 1). Finalmente, la creciente dependencia del sector financiero en sistemas de IA demanda un enfoque regulatorio no solo reactivo, sino también proactivo (Documento 1).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 85,
+        "cobertura": 90,
+        "claridad": 80,
+        "citas": 70,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 83.5,
+      "fecha": "2025-11-18T00:34:16.460761Z"
+    },
+    {
+      "id": 40,
+      "archivo": "Panorama actual del uso de la inteligencia artificial en el sector financiero",
+      "pregunta": "¿Cómo se conecta la IA financiera con sostenibilidad y criterios ESG, y cuál es el problema actual?",
+      "respuesta_esperada": "Las instituciones financieras ya usan IA para recolectar y analizar grandes volúmenes de datos ambientales, sociales y de gobernanza (ESG), con el fin de evaluar riesgos de sostenibilidad y apoyar decisiones responsables. Sin embargo, el documento dice que todavía hay brecha: falta investigación profunda sobre IA y finanzas sostenibles, la calidad de los datos ESG no siempre es confiable, y aún no existen marcos regulatorios maduros que garanticen transparencia y uso ético de estos modelos.",
+      "respuesta_recibida": "La Inteligencia Artificial (IA) en el sector financiero se conecta con la sostenibilidad y los criterios ESG (ambientales, sociales y de gobernanza) al ser utilizada para integrar estos criterios en los procesos de decisión (Documento 2). La IA se emplea para recolectar, procesar y analizar grandes volúmenes de datos no estructurados relacionados con sostenibilidad, lo que permite una evaluación más precisa de los riesgos ambientales y sociales (Documento 2). El estudio de Darko et al. refuerza la necesidad de desarrollar una agenda investigativa centrada en cómo la IA puede apoyar una gestión financiera más ética, inclusiva y ambientalmente responsable (Documento 1).\n\nSin embargo, el problema actual es que, a pesar de las aplicaciones prometedoras de la IA en diversos sectores, incluido el financiero, el número de investigaciones que analizan su rol en el cumplimiento de objetivos de sostenibilidad financiera es todavía escaso (Documento 1). Se evidencia un vacío investigativo en cuanto a la relación entre IA y finanzas sostenibles (Documento 3). Además, la ausencia de marcos normativos adaptados y de sistemas explicables limita la alineación entre innovación tecnológica y sostenibilidad institucional (Documento 1). La adopción de la IA también plantea riesgos significativos que pueden afectar la equidad, la transparencia y la sostenibilidad del sistema financiero, y existe una débil preparación institucional ante amenazas emergentes (Documento 3).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 95,
+        "claridad": 90,
+        "citas": 70,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 87.75,
+      "fecha": "2025-11-18T00:34:25.673758Z"
+    },
+    {
+      "id": 41,
+      "archivo": "Responsible artificial intelligence governance",
+      "pregunta": "¿Qué problema intenta resolver el concepto de 'gobernanza de IA responsable' que proponen los autores?",
+      "respuesta_esperada": "Los autores dicen que existen muchos principios éticos de IA (como equidad, transparencia, seguridad), pero no está claro cómo llevar esos principios a la práctica real dentro de las organizaciones. La literatura es fragmentada, abstracta y carece de guías operativas. Por eso, el trabajo propone una definición y un marco de 'gobernanza de IA responsable' que conecte principios éticos con prácticas concretas para diseñar, ejecutar, monitorear y evaluar sistemas de IA durante todo su ciclo de vida.",
+      "respuesta_recibida": "Los autores identifican que la creciente dependencia del sector financiero en sistemas de IA demanda un enfoque regulatorio que no solo sea reactivo sino también proactivo, debido a la falta de armonización internacional que dificulta la supervisión de tecnologías que operan en múltiples jurisdicciones (Documento 1). Además, subrayan que la acelerada integración de la IA en los servicios financieros ha expuesto importantes vacíos regulatorios (Documento 1).\n\nEl concepto de 'gobernanza de IA responsable' intenta resolver estos problemas al proponer que las instituciones financieras adopten marcos de gobernanza interna que complementen las regulaciones externas. Esto es especialmente relevante para temas como la gestión de sesgos algorítmicos y la protección de datos personales, con el fin de construir un entorno regulatorio más coherente y resiliente frente a los desafíos éticos y tecnológicos actuales (Documento 1).\n\nAdicionalmente, se propone un marco con tres componentes: legal, ético y robusto desde el punto de vista ético y social. Este marco se ocupa de principios éticos como el respeto a la autonomía humana, la prevención del daño, la equidad (fairness) y la explicabilidad, así como de exigencias para una IA confiable que incluyen agencia humana y supervisión, robustez técnica y seguridad, privacidad y gobierno de los datos, transparencia, diversidad, no discriminación y equidad, bienestar medioambiental y social, y rendición de cuentas (Documento 3). La propuesta se reconoce explícitamente como humano-céntrica (Documento 3).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 30,
+        "cobertura": 40,
+        "claridad": 85,
+        "citas": 100,
+        "alucinacion": 50,
+        "seguridad": 100
+      },
+      "score_final": 58.75,
+      "fecha": "2025-11-18T00:34:35.146419Z"
+    },
+    {
+      "id": 42,
+      "archivo": "Responsible artificial intelligence governance",
+      "pregunta": "¿Cómo definen los autores la 'gobernanza de IA responsable'?",
+      "respuesta_esperada": "La definen como un conjunto de prácticas para desarrollar, desplegar y monitorear aplicaciones de IA de manera segura, confiable y ética, asegurando que la IA funcione apropiadamente durante todo su ciclo de vida. Esta gobernanza incluye asignar autoridad y control sobre los datos, establecer responsabilidades claras y crear incentivos y sanciones para usos adecuados de la información.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 5,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 10.0,
+      "fecha": "2025-11-18T00:34:44.260538Z"
+    },
+    {
+      "id": 43,
+      "archivo": "Responsible artificial intelligence governance",
+      "pregunta": "¿Cuáles son los tres tipos de prácticas organizacionales que componen la gobernanza de IA responsable en el marco propuesto?",
+      "respuesta_esperada": "El marco describe tres tipos de prácticas: Prácticas estructurales: quién decide qué. Incluye comités, roles, responsabilidades y distribución de autoridad dentro (y fuera) de la organización. Prácticas procedimentales: cómo se hace. Son los procesos para planear, auditar, monitorear riesgos, manejar datos, responder incidentes y alinear la IA con la estrategia competitiva. Prácticas relacionales: quién trabaja con quién. Se trata de colaboración entre áreas, participación de actores externos, formación en 'alfabetización en IA responsable' y mecanismos para involucrar a las partes interesadas. Estas tres capas buscan que la responsabilidad no sea solo un documento ético, sino algo vivo en la operación diaria.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 0,
+        "seguridad": 100
+      },
+      "score_final": 5.0,
+      "fecha": "2025-11-18T00:34:52.989401Z"
+    },
+    {
+      "id": 44,
+      "archivo": "Responsible artificial intelligence governance",
+      "pregunta": "¿Cuáles son las condiciones externas e internas que influyen (los 'antecedentes') en cómo una organización aplica la gobernanza de IA responsable?",
+      "respuesta_esperada": "El artículo identifica tres grandes fuerzas: Expectativas y normas sociales / regulación: cambios culturales, presión pública, regulación emergente (por ejemplo, leyes sobre IA) que empujan a las empresas a ser responsables. Valores y cultura organizacional: la forma en que la empresa ya toma decisiones, su estructura de poder, su tolerancia ética y su velocidad para adaptarse. Principios de IA responsable que la organización adopta: por ejemplo, transparencia, equidad, privacidad, seguridad, supervisión humana, bienestar social y ambiental. Estas fuerzas determinan qué tan en serio toma la empresa la responsabilidad en IA y cómo la traduce en procesos reales.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 10.0,
+      "fecha": "2025-11-18T00:35:01.973723Z"
+    },
+    {
+      "id": 45,
+      "archivo": "Shaping the future of AI balancing innovation and ethics in global regulation",
+      "pregunta": "¿Por qué se dice que es urgente regular la IA a nivel global y no solo a nivel nacional?",
+      "respuesta_esperada": "Porque la IA ya está metida en sectores críticos (salud, finanzas, transporte, vigilancia) y puede tomar decisiones autónomas que afectan derechos humanos, privacidad, seguridad y equidad social. Hoy no existe un marco unificado: la Unión Europea tiene protecciones fuertes como el GDPR (incluyendo derechos como el derecho a explicación), mientras que otras regiones no tienen marcos comparables, lo que crea un paisaje regulatorio fragmentado que dificulta cooperación internacional y control ético del impacto de la IA. Esto se agrava por riesgos como sesgos algorítmicos, vigilancia masiva, manipulación política y armas autónomas.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 17,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 10.0,
+      "fecha": "2025-11-18T00:35:20.225864Z"
+    },
+    {
+      "id": 46,
+      "archivo": "Shaping the future of AI balancing innovation and ethics in global regulation",
+      "pregunta": "¿Cómo se comparan los enfoques regulatorios de la Unión Europea, Estados Unidos y Asia?",
+      "respuesta_esperada": "Unión Europea: adopta un enfoque integral y basado en derechos, con el GDPR y propuestas como el AI Act, que buscan transparencia, responsabilidad y control humano, sobre todo en aplicaciones de 'alto riesgo'. Estados Unidos: sigue un modelo descentralizado y sectorial. Diferentes agencias (por ejemplo, FDA en salud, FAA en aviación, Departamento de Defensa en defensa) emiten guías propias. Esto permite flexibilidad e innovación específica por sector, pero genera vacíos e inconsistencias nacionales. Asia: no hay una sola estrategia. China impulsa una estrategia estatal para ser potencia en IA; Japón enfatiza la integración social responsable (empleo, población envejecida, privacidad); y Corea del Sur invierte en IA ética mediante alianzas público-privadas. Estas diferencias reflejan prioridades distintas: competitividad tecnológica, estabilidad social y ética.",
+      "respuesta_recibida": "La Unión Europea adopta un enfoque regulatorio en comparación con el enfoque más descentralizado y sectorial de Estados Unidos. Estados Unidos tiene un mosaico de regulaciones, con estados individuales y agencias federales que desarrollan directrices adaptadas a sectores específicos. Por ejemplo, en el sector de la salud, la Food and Drug Administration ha emitido directrices para la IA en dispositivos médicos. (Documento 1)\n\nAsia presenta estrategias diversas. China, por ejemplo, adopta un enfoque impulsado por el Estado. (Documento 1) Corea del Sur pone un fuerte énfasis en las consideraciones éticas y las alianzas público-privadas, buscando equilibrar el avance tecnológico con los valores sociales. (Documento 2)\n\nLas diferentes regiones están abordando los desafíos y oportunidades de la IA de maneras variadas. Mientras que Estados Unidos adopta un enfoque más descentralizado y sectorial, países asiáticos como China, Japón y Corea del Sur demuestran estrategias mixtas que combinan dirección gubernamental, innovación de mercado y consideraciones sociales. (Documento 2)\n\nEl análisis examina cómo diferentes regiones globales, notablemente la UE, EE. UU. y países asiáticos, se están acercando a la gobernanza de la IA, incluyendo marcos existentes como el GDPR en Europa, las directrices regulatorias propuestas por EE. UU. y políticas emergentes en Asia como el Plan de Desarrollo de la Nueva Generación de Inteligencia Artificial de China. (Documento 3)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 85,
+        "claridad": 85,
+        "citas": 70,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 85.0,
+      "fecha": "2025-11-18T00:35:29.930277Z"
+    },
+    {
+      "id": 47,
+      "archivo": "Shaping the future of AI balancing innovation and ethics in global regulation",
+      "pregunta": "¿Cuáles son los principales riesgos éticos asociados al uso avanzado de IA?",
+      "respuesta_esperada": "El documento destaca: Sesgo algorítmico y discriminación: los modelos pueden amplificar prejuicios históricos y afectar decisiones en justicia penal, crédito, reclutamiento o reconocimiento facial, con impacto desigual en mujeres y grupos racializados. Vigilancia masiva y privacidad: sistemas de vigilancia con IA permiten recolectar y analizar datos personales a gran escala, planteando tensiones entre seguridad y libertades civiles. Armas autónomas y toma de decisiones letales sin intervención humana: surgen dudas sobre responsabilidad moral y legal cuando una máquina toma decisiones de vida o muerte. Desplazamiento laboral y desigualdad económica: la automatización de tareas repetitivas puede sacar personas del mercado laboral y obligar a reconversión masiva de habilidades. Los autores dicen que estos riesgos exigen marcos éticos y regulatorios robustos, no solo avances técnicos.",
+      "respuesta_recibida": "Los principales riesgos éticos asociados al uso avanzado de la IA incluyen:\n\n*   **Impacto en la equidad y la inclusión financiera:** (Documento 1)\n*   **Potencial para manipular a los usuarios humanos:** (Documento 2, Documento 3)\n*   **Susceptibilidad de niños y jóvenes a la manipulación:** (Documento 2, Documento 3)",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 20,
+        "cobertura": 20,
+        "claridad": 70,
+        "citas": 100,
+        "alucinacion": 80,
+        "seguridad": 100
+      },
+      "score_final": 50.5,
+      "fecha": "2025-11-18T00:35:38.898985Z"
+    },
+    {
+      "id": 48,
+      "archivo": "Shaping the future of AI balancing innovation and ethics in global regulation",
+      "pregunta": "¿Qué principios se proponen como base de un marco internacional de regulación de IA responsable?",
+      "respuesta_esperada": "El texto sugiere que cualquier marco global debería incluir al menos: Transparencia: entender cómo decide el sistema y garantizar derecho a explicación en decisiones de alto impacto. Rendición de cuentas: definir claramente quién es responsable cuando un sistema de IA causa daño o actúa de forma no ética. Equidad y no discriminación: evitar sesgos y asegurar que el modelo funcione de forma justa entre distintos grupos demográficos. Privacidad y protección de datos: proteger datos personales, exigir consentimiento informado y limitar usos indebidos. Seguridad y robustez: sistemas seguros frente a ciberataques y que no pongan en riesgo a las personas. Respeto a los derechos humanos y beneficio social: alinear la IA con dignidad humana, bienestar social y el interés público global.",
+      "respuesta_recibida": "Los principios que se proponen como base de un marco internacional de regulación de IA responsable son la transparencia, la equidad y la trazabilidad (Documento 3). Además, se busca promover una IA confiable que sea legal, ética y robusta desde el punto de vista ético y social (Documento 1).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 70,
+        "cobertura": 40,
+        "claridad": 85,
+        "citas": 50,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 65.25,
+      "fecha": "2025-11-18T00:35:47.660940Z"
+    },
+    {
+      "id": 49,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines",
+      "pregunta": "¿Cómo ha evolucionado la IA desde sistemas basados en reglas hasta inteligencia impulsada por datos?",
+      "respuesta_esperada": "Pasó de sistemas simbólicos/experto con reglas explícitas a un cambio de paradigma en los 80s con aprendizaje automático que aprende de datos; luego, en los 2000s, redes neuronales y deep learning impulsados por cómputo y big data lograron avances en visión, NLP y sistemas autónomos; hoy destacan modelos preentrenados a gran escala y la IA generativa, junto con desafíos éticos (sesgo, transparencia, impacto social).",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 0,
+        "seguridad": 100
+      },
+      "score_final": 5.0,
+      "fecha": "2025-11-18T00:35:56.461256Z"
+    },
+    {
+      "id": 50,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines",
+      "pregunta": "¿Cuáles son tres limitaciones clave de los sistemas basados en reglas que motivaron el giro hacia el aprendizaje con datos?",
+      "respuesta_esperada": "a) Inflexibilidad: no se adaptan a situaciones nuevas no contempladas por las reglas. b) Problemas de escalabilidad: el número de reglas crece exponencialmente y se vuelve inmanejable. c) Fragilidad ante la incertidumbre: si la entrada no coincide exactamente con las reglas, fallan en entornos reales.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 10.0,
+      "fecha": "2025-11-18T00:36:05.282593Z"
+    },
+    {
+      "id": 51,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines",
+      "pregunta": "¿Qué habilitó el auge del deep learning en los 2000s–2010s y qué tipos de redes protagonizaron los avances?",
+      "respuesta_esperada": "Lo habilitaron más poder de cómputo (GPUs), grandes conjuntos de datos y técnicas de entrenamiento mejoradas (p. ej., backprop en redes más profundas). Los hitos vinieron con redes convolucionales (CNNs) en visión, RNN/LSTM en secuencias y traducción y la consolidación de aprendizaje profundo como enfoque dominante.",
+      "respuesta_recibida": "El auge del deep learning en los 2000s-2010s fue habilitado por los avances en hardware, específicamente por el aumento de la potencia computacional proporcionada por las Unidades de Procesamiento Gráfico (GPUs) (Documento 3). También fue crucial la explosión de datos digitales en los 2000s, proveniente del crecimiento de internet, redes sociales y tecnologías de sensores, lo que proporcionó los vastos conjuntos de datos necesarios para entrenar modelos de deep learning de manera efectiva (Documento 3).\n\nLos tipos de redes que protagonizaron los avances incluyen las Redes Neuronales Convolucionales (CNNs) para el análisis de imágenes y video, y los modelos como LSTMs, mecanismos de atención y modelos Transformer para el Procesamiento del Lenguaje Natural (NLP) (Documento 2).",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 85,
+        "claridad": 90,
+        "citas": 80,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 87.75,
+      "fecha": "2025-11-18T00:36:14.677706Z"
+    },
+    {
+      "id": 52,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines",
+      "pregunta": "Menciona dos tendencias de los 2020s y un ejemplo de aplicación para cada una.",
+      "respuesta_esperada": "Generative AI y LLMs: modelos como GPT-3/PaLM/Claude habilitan chatbots, asistentes y creación automática de contenido. IA en salud: diagnóstico por imagen (rayos X, MRI, CT), detección temprana y apoyo a descubrimiento de fármacos (incluido el caso COVID-19).",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 5,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 10.0,
+      "fecha": "2025-11-18T00:36:23.593274Z"
+    },
+    {
+      "id": 53,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines",
+      "pregunta": "¿Qué es el 'boom de la ética de la IA' y qué lo causó?",
+      "respuesta_esperada": "El 'boom de la ética de la IA' describe el aumento explosivo de guías, marcos éticos y llamados a regulación alrededor de la IA. Esto ocurre porque el uso de IA creció muy rápido y empezó a generar riesgos reales: violaciones de privacidad, vigilancia masiva, discriminación algorítmica, problemas de seguridad, impactos ambientales y consecuencias no intencionadas que afectan especialmente a poblaciones vulnerables. Frente a eso, gobiernos, empresas, academia y sociedad civil comenzaron a publicar lineamientos éticos para intentar controlar el impacto de la IA.",
+      "respuesta_recibida": "El 'boom de la ética de la IA' se refiere a un período marcado por una demanda sin precedentes de regulación y orientación normativa en el campo de la inteligencia artificial, y es causado por el aumento de la vigilancia impulsada por IA, el costo ambiental de la industria y la amplificación de prejuicios y discriminación a gran escala (Documento 34, Documento 35, Documento 41, Documento 42).",
+      "num_documento": 45,
+      "scores": {
+        "exactitud": 90,
+        "cobertura": 85,
+        "claridad": 90,
+        "citas": 70,
+        "alucinacion": 95,
+        "seguridad": 100
+      },
+      "score_final": 85.75,
+      "fecha": "2025-11-18T00:36:34.625391Z"
+    },
+    {
+      "id": 54,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines",
+      "pregunta": "Cuáles son los principios éticos que más se repiten en las guías analizadas a nivel mundial?",
+      "respuesta_esperada": "Al analizar 200 lineamientos de gobernanza de IA publicados por gobiernos, empresas privadas, ONGs y universidades en 37 países, se identificaron al menos 17 principios recurrentes. Entre los más citados están: Transparencia / explicabilidad / auditabilidad: que los sistemas sean entendibles y auditables. Justicia / equidad / no discriminación: evitar sesgos y daños desproporcionados a grupos vulnerables. Responsabilidad / rendición de cuentas: que quienes desarrollan y despliegan IA asuman consecuencias. Privacidad / protección de datos: control sobre el uso de la información personal. Confiabilidad / seguridad / robustez / confianza: que los sistemas sean seguros, fiables y aceptables socialmente. Estos principios aparecen de forma consistente en trabajos previos y se confirman también en este análisis ampliado.",
+      "respuesta_recibida": "Los principios éticos que más se repiten en las guías analizadas a nivel mundial, según un meta-análisis de 200 políticas y directrices de gobernanza para el uso de la IA, son al menos 17 grupos de principios resonantes (Documento 7, Documento 8, Documento 9, Documento 10).\n\nEspecíficamente, se mencionan los siguientes principios clásicos aplicados a entornos digitales, a los que se les añade la explicabilidad y la rendición de cuentas:\n\n*   **Beneficencia**: Poner los progresos al servicio de todos los seres humanos y la sostenibilidad del planeta (Documento 2).\n*   **No-maleficencia**: Evitar los daños posibles, protegiendo a las personas en cuestiones de privacidad, mal uso de los datos, y en la posible sumisión a decisiones tomadas por máquinas no supervisadas por seres humanos (Documento 2).\n*   **Autonomía**: Reconocimiento de la autonomía de las personas, que puede fortalecerse con el uso de sistemas inteligentes, y en cuyas manos deben ponerse tanto el control como las decisiones significativas (Documento 1, Documento 2).\n*   **Justicia**: Distribuir equitativamente los beneficios (Documento 1, Documento 2).\n*   **Explicabilidad y rendición de cuentas**: (Documento 1, Documento 2).\n\nLa base para estos principios éticos es el reconocimiento de la autonomía y la dignidad (Documento 1).",
+      "num_documento": 10,
+      "scores": {
+        "exactitud": 70,
+        "cobertura": 60,
+        "claridad": 85,
+        "citas": 20,
+        "alucinacion": 80,
+        "seguridad": 100
+      },
+      "score_final": 62.25,
+      "fecha": "2025-11-18T00:36:44.529016Z"
+    },
+    {
+      "id": 55,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines",
+      "pregunta": "Cuáles son las principales brechas y problemas detectados en las guías éticas actuales sobre IA?",
+      "respuesta_esperada": "El estudio señala varias alertas: Sesgo geográfico y lingüístico: la mayoría de documentos proviene de Europa, Norteamérica y partes de Asia; regiones como África y América Latina están subrepresentadas, en parte por barreras de idioma y acceso. Poca representación de autoras mujeres: entre los documentos donde hay autores identificados, la mayoría de nombres inferidos son masculinos; además, en 66% de los textos ni siquiera se lista autoría, lo que dificulta evaluar diversidad. Énfasis en principios vagos y 'soft law': la gran mayoría de documentos son recomendaciones no vinculantes y no explican cómo implementar técnicamente esos principios ni cómo fiscalizarlos. Muy pocos proponen regulación legal obligatoria. Falta de atención a ciertos riesgos estructurales: temas como derechos laborales, impacto ambiental, sostenibilidad, desinformación y efectos a largo plazo (por ejemplo, autonomía letal de sistemas o riesgos existenciales) reciben mucha menos atención que transparencia y fairness. Estas brechas muestran que todavía no hay una gobernanza global equilibrada ni realmente aplicada en la práctica.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 10.0,
+      "fecha": "2025-11-18T00:36:53.194626Z"
+    },
+    {
+      "id": 56,
+      "archivo": "Worldwide AI ethics: A review of 200 guidelines",
+      "pregunta": "¿Por qué la falta de regulación obligatoria en IA se considera un problema en las guías éticas actuales?",
+      "respuesta_esperada": "Muchas guías de ética de IA son 'soft law': recomendaciones, principios o marcos voluntarios sin fuerza legal. El problema es que describen valores como transparencia, equidad o protección de datos, pero casi nunca dicen cómo aplicarlos técnicamente ni quién es responsable si no se cumplen. Eso deja vacíos en rendición de cuentas, supervisión y fiscalización real, especialmente en sectores de alto impacto social donde la IA ya está tomando decisiones.",
+      "respuesta_recibida": "No tengo información suficiente.",
+      "num_documento": 3,
+      "scores": {
+        "exactitud": 0,
+        "cobertura": 0,
+        "claridad": 0,
+        "citas": 0,
+        "alucinacion": 100,
+        "seguridad": 100
+      },
+      "score_final": 10.0,
+      "fecha": "2025-11-18T00:37:01.781781Z"
+    }
+  ],
+  "resumen": {
+    "provider_rag": "gemini",
+    "total_preguntas": 56,
+    "score_promedio": 63.41,
+    "promedios_criterios": {
+      "exactitud": 62.14,
+      "cobertura": 55.54,
+      "claridad": 68.12,
+      "citas": 54.11,
+      "alucinacion": 90.18,
+      "seguridad": 100.0
+    }
+  }
+}

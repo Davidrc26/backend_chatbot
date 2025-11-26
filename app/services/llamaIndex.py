@@ -6,6 +6,9 @@ from llama_index.core import SimpleDirectoryReader, VectorStoreIndex, StorageCon
 from llama_index.core.node_parser import SemanticSplitterNodeParser
 from llama_index.embeddings.gemini import GeminiEmbedding
 from llama_index.embeddings.ollama import OllamaEmbedding
+from llama_index.llms.gemini import Gemini
+from llama_index.llms.ollama import Ollama
+
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from app.core.config import settings
 from app.services.chroma_service import chroma_service
@@ -44,6 +47,27 @@ class LlamaIndexService:
         else:  # llama/ollama
             return OllamaEmbedding(
                 model_name=settings.OLLAMA_MODEL,
+                base_url=settings.OLLAMA_BASE_URL
+            )
+    
+    def _get_llm(self, provider: str = "llama"):
+        """
+        Obtiene el modelo LLM según el provider
+        
+        Args:
+            provider: "llama" para Ollama, "gemini" para Google Gemini
+            
+        Returns:
+            Modelo LLM de LlamaIndex
+        """
+        if provider.lower() == "gemini":
+            return Gemini(
+                model="models/gemini-2.5-flash-lite",
+                api_key=settings.GOOGLE_API_KEY
+            )
+        else:  # llama/ollama
+            return Ollama(
+                model=settings.OLLAMA_MODEL,
                 base_url=settings.OLLAMA_BASE_URL
             )
     
@@ -234,8 +258,9 @@ class LlamaIndexService:
         Returns:
             Dict con la respuesta y los nodos fuente
         """
-        # Obtener embeddings
+        # Obtener embeddings y LLM
         embed_model = self._get_embeddings(provider)
+        llm = self._get_llm(provider)
         
         # Obtener colección de ChromaDB
         client = chroma_service.get_client()
@@ -258,9 +283,32 @@ class LlamaIndexService:
             embed_model=embed_model
         )
         
-        # Crear query engine
+        # Crear query engine con configuración para responder SOLO basándose en los documentos
+        from llama_index.core.prompts import PromptTemplate
+        
+        # Prompt personalizado que obliga a usar solo el contexto
+        qa_prompt_template = PromptTemplate(
+            """Eres un asistente que SOLO puede responder usando la información proporcionada en el contexto.
+
+Reglas estrictas:
+1. SOLO usa información que esté explícitamente en el contexto proporcionado
+2. Si la información no está en el contexto, responde: "No tengo información sobre eso en los documentos disponibles"
+3. NO inventes, supongas o uses conocimiento externo
+4. Cita de dónde sacas la información cuando sea relevante
+
+Contexto:
+{context_str}
+
+Pregunta: {query_str}
+
+Respuesta basada ÚNICAMENTE en el contexto:"""
+        )
+        
         query_engine = index.as_query_engine(
-            similarity_top_k=top_k
+            similarity_top_k=top_k,
+            text_qa_template=qa_prompt_template,
+            response_mode="compact",  # Usa el contexto de forma compacta
+            llm=llm  # Usar el LLM especificado
         )
         
         # Ejecutar query

@@ -116,3 +116,42 @@ async def chat_with_history(
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en el chat con historial: {str(e)}")
+    
+    
+@router.post("/rag/with/llamaindex", response_model=ChatResponse)
+async def chat_rag_with_llamaindex(
+    chat_request: ChatRequest,
+    provider: str = Query(default="llama", description="Provider: 'llama' o 'gemini'")
+):
+    """
+    Chat con RAG usando LlamaIndex para la gestión de documentos
+    
+    Args:
+        chat_request: Mensaje del usuario y configuración (incluye use_rerank)
+        provider: "llama" o "gemini"
+        
+    Returns:
+        Respuesta con contexto de documentos gestionados por LlamaIndex
+    """
+    if provider not in ["llama", "gemini"]:
+        raise HTTPException(status_code=400, detail="Provider debe ser 'llama' o 'gemini'")
+    
+    try:
+        result = chat_service.get_rag_response_with_llamaindex(
+            message=chat_request.message,
+            provider=provider,
+            n_results=chat_request.n_results,
+            use_rerank=chat_request.use_rerank
+        )
+        
+        return ChatResponse(
+            response=result["response"],
+            success=True,
+            sources=result.get("sources"),
+            metadatas=result.get("metadatas"),
+            found_documents=result.get("found_documents"),
+            reranked=result.get("reranked")
+        )
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error en el chat RAG con LlamaIndex: {str(e)}")   

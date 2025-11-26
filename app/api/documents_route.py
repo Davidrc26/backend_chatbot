@@ -269,8 +269,8 @@ async def count_documents(
         raise HTTPException(status_code=500, detail=f"Error contando documentos: {str(e)}")
 
 
-@router.post("/upload-file-langchain", response_model=DocumentResponse)
-async def upload_file_langchain(
+@router.post("/upload-file-llamaindex", response_model=DocumentResponse)
+async def upload_file_llamaindex(
     file: UploadFile = File(..., description="Archivo PDF a procesar con LlamaIndex"),
     provider: str = Form(default="llama", description="Provider de embeddings: 'llama' o 'gemini'"),
     buffer_size: int = Form(
