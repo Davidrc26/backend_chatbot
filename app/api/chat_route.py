@@ -1,8 +1,45 @@
 from fastapi import APIRouter, HTTPException, Query
+from typing import List
 from app.schemas.chat import ChatRequest, ChatResponse, ChatWithHistoryRequest
 from app.services.chat_service import chat_service
 
 router = APIRouter(prefix="/chat", tags=["chat"])
+
+
+def format_sources_from_metadatas(metadatas: List[dict]) -> List[str]:
+    """
+    Formatea las fuentes desde los metadatos de la misma manera que el bot de Telegram.
+    
+    Args:
+        metadatas: Lista de diccionarios con metadatos de documentos
+        
+    Returns:
+        Lista de fuentes formateadas como "filename (year)" o "filename"
+    """
+    sources = []
+    seen_sources = set()  # Para evitar duplicados
+    
+    for i, metadata in enumerate(metadatas):
+        if isinstance(metadata, dict):
+            filename = metadata.get("filename") or metadata.get("name") or f"Documento {i+1}"
+            year = metadata.get("year") or metadata.get("date")
+            
+            if year:
+                source_text = f"{filename} ({year})"
+            else:
+                source_text = filename
+            
+            # Solo agregar si no está duplicado
+            if source_text not in seen_sources:
+                seen_sources.add(source_text)
+                sources.append(source_text)
+        else:
+            source_text = f"Documento {i+1}"
+            if source_text not in seen_sources:
+                seen_sources.add(source_text)
+                sources.append(source_text)
+    
+    return sources
 
 
 @router.post("/simple", response_model=ChatResponse)
@@ -64,11 +101,15 @@ async def chat_with_rag(
             use_rerank=chat_request.use_rerank
         )
         
+        # Formatear fuentes desde metadatos (mismo estilo que bot de Telegram)
+        metadatas = result.get("metadatas") or []
+        formatted_sources = format_sources_from_metadatas(metadatas)
+        
         return ChatResponse(
             response=result["response"],
             success=True,
-            sources=result.get("sources"),
-            metadatas=result.get("metadatas"),
+            sources=formatted_sources,
+            metadatas=metadatas,
             found_documents=result.get("found_documents"),
             reranked=result.get("reranked")
         )
@@ -105,11 +146,15 @@ async def chat_with_history(
             use_rerank=chat_request.use_rerank
         )
         
+        # Formatear fuentes desde metadatos (mismo estilo que bot de Telegram)
+        metadatas = result.get("metadatas") or []
+        formatted_sources = format_sources_from_metadatas(metadatas)
+        
         return ChatResponse(
             response=result["response"],
             success=True,
-            sources=result.get("sources"),
-            metadatas=result.get("metadatas"),
+            sources=formatted_sources,
+            metadatas=metadatas,
             found_documents=result.get("found_documents"),
             reranked=result.get("reranked")
         )
@@ -144,11 +189,15 @@ async def chat_rag_with_llamaindex(
             use_rerank=chat_request.use_rerank
         )
         
+        # Formatear fuentes desde metadatos (mismo estilo que bot de Telegram)
+        metadatas = result.get("metadatas") or []
+        formatted_sources = format_sources_from_metadatas(metadatas)
+        
         return ChatResponse(
             response=result["response"],
             success=True,
-            sources=result.get("sources"),
-            metadatas=result.get("metadatas"),
+            sources=formatted_sources,
+            metadatas=metadatas,
             found_documents=result.get("found_documents"),
             reranked=result.get("reranked")
         )
