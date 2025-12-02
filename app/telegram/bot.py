@@ -2,6 +2,7 @@
 import asyncio
 from typing import Optional
 import httpx
+from matplotlib import text
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     Application,
@@ -12,7 +13,6 @@ from telegram.ext import (
     ContextTypes,
 )
 from telegram.constants import ChatAction
-
 from app.core.config import settings
 from .session import UserState, UserSession, user_sessions
 
@@ -112,9 +112,9 @@ class TelegramBot:
 
     async def cmd_politica(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
-            "📄 Política de tratamiento de datos (resumen):\n"
+            " 📄 *Política de tratamiento de datos*:\n"
             "- No almacenamos tu número ni tu username.\n"
-            "- Guardamos solo un session_id anónimo y el historial de chat si activas el modo extendido.\n"
+            "- Guardamos solo un id de sesión anónimo y el historial de chat si activas el modo extendido.\n"
             "- Tus mensajes pueden usarse de forma anónima para mejorar el servicio.\n\n"
             "Si estás de acuerdo escribe *ACEPTO*.",
             parse_mode="Markdown",
@@ -123,10 +123,11 @@ class TelegramBot:
     async def cmd_fuentes(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         user_id = update.effective_user.id
         session = user_sessions.get(user_id)
-        if not session or not session.last_sources:
+        if not session or not getattr(session, "last_sources", []):
             await update.message.reply_text("No hay fuentes disponibles todavía.")
             return
-        text = "🔎 Fuentes encontradas:\n" + "\n".join(f"- {s}" for s in session.last_sources)
+        lines = [f"- {s}" for s in session.last_sources]
+        text = "🔎 Fuentes encontradas:\n" + "\n".join(lines)
         await update.message.reply_text(text)
 
     async def cmd_reset(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -275,12 +276,39 @@ class TelegramBot:
             await update.message.reply_text("❗ El backend devolvió una respuesta no válida.")
             return
 
-        # Extract answer and sources according to your ChatResponse schema
+        # Extract answer and raw sources
         answer = data.get("response") or data.get("answer") or "No se recibió respuesta."
-        sources = data.get("sources", []) or data.get("found_documents", []) or []
+        raw_sources = data.get("sources", []) or data.get("found_documents", []) or []
 
-        # persist history (if extendido) and sources
+        
+        # Cambiar esta parte para usar metadatos en lugar de sources
+        sources = []
+        metadatas = data.get("metadatas", []) or []
+        seen_sources = set()  # Para evitar duplicados
+        
+        for i, metadata in enumerate(metadatas):
+            if isinstance(metadata, dict):
+                filename = metadata.get("filename") or metadata.get("name") or f"Documento {i+1}"
+                year = metadata.get("year") or metadata.get("date")
+                
+                if year:
+                    source_text = f"{filename} ({year})"
+                else:
+                    source_text = filename
+                
+                # Solo agregar si no está duplicado
+                if source_text not in seen_sources:
+                    seen_sources.add(source_text)
+                    sources.append(source_text)
+            else:
+                source_text = f"Documento {i+1}"
+                if source_text not in seen_sources:
+                    seen_sources.add(source_text)
+                    sources.append(source_text)
+
+        # persist history (if extendido) and formatted sources
         if session.mode == "extendido":
+            session.chat_history = getattr(session, "chat_history", [])
             session.chat_history.append({"role": "user", "content": text})
             session.chat_history.append({"role": "assistant", "content": answer})
 
